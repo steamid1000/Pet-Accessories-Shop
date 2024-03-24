@@ -120,7 +120,7 @@ input[type="submit"]:hover{
     </style>
 </head>
 <body>
-    <?php require_once "components/navbar.php" ?>
+    <?php require_once "../components/navbar.php" ?>
     <div class="center">
         <h1 style="color:black">Login</h1>
         <form action="" method="post">
