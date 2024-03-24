@@ -1,0 +1,107 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+         
+        .gallery{
+            width: 900px;;
+            border: 1px solid red;;
+            display: flex;
+            overflow-x: scroll;
+        }
+        .gallery div{
+            width: 100%;
+            display: grid;
+            grid-template-columns: auto auto auto auto ;
+            grid-gap: 20px;
+            padding: 10px;
+            flex: none;
+        }
+        .gallery div span img{
+            max-width: 40%;;
+            object-fit: contain;
+            aspect-ratio: 4/3;
+            filter: grayscale(100%);
+            transition: transform 0.8s ;
+        }
+        .gallery::-webkit-scrollbar{
+            display: none;
+        }
+        .gallery-wrap{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px auto;
+            border: 1px solid green;
+        }
+        #backBtn,#nextBtn{
+            width: 4rem;
+            cursor: pointer;
+            /* margin: 40px;; */
+        }
+        .gallery div img:hover{
+            filter: grayscale(0);
+            cursor: pointer;
+            transform: scale(1.1);
+        }
+   div span{
+    display: inline-block;
+    align-items: center;
+    text-align: center;
+    color:blue;
+    border: 1px solid red;
+   }
+   .gallery-wrap{
+    border: 1px solid blue;
+
+   }
+   .gallery{
+    width: 100%;
+   }
+
+ 
+    
+    </style>
+    <title>Document</title>
+ </head>
+ <body>
+    <div class="gallery-wrap">
+        <img src="./imgs/back.png" id="backBtn" alt="">
+        <div class="gallery">
+            <div class="div">
+                <span><img src="./imgs/daily-00.jpg" alt=""> <h2>OKK</h2></span>
+                <span><img src="./imgs/daily-02.avif" alt=""></span>
+                <span><img src="./imgs/daily-02.avif" alt=""></span>
+                <span><img src="./imgs/daily-04.jpg" alt=""></span>
+            </div>
+            <div class="div">
+                <span><img src="./imgs/daily-00.jpg" alt=""></span>
+                <span><img src="./imgs/daily-05.jpg" alt=""></span>
+                <span><img src="./imgs/daily-05.jpg" alt=""></span>
+                <span><img src="./imgs/daily-00.jpg" alt=""></span>
+            </div>
+        </div>
+        <img src="./imgs/next.png" id="nextBtn" alt="">
+    </div>
+    <script>
+        let scrollContainer=document.querySelector('.gallery');
+        let backBtn=document.getElementById('backBtn');
+        let nextBtn=document.getElementById('nextBtn');
+        scrollContainer.addEventListener('wheel',(evt)=>{
+            evt.preventDefault();
+            scrollContainer.scrollLeft += evt.deltaY ;
+            scrollContainer.style.scrollBehavior="smooth";
+        })
+        nextBtn.addEventListener("click",()=>{
+            scrollContainer.style.scrollBehavior="smooth";
+            scrollContainer.scrollLeft+=900;
+        })
+        backBtn.addEventListener("click",()=>{
+            scrollContainer.style.scrollBehavior="smooth";
+            scrollContainer.scrollLeft+= -900;
+        })
+    </script>
+ </body>
+ </html>
