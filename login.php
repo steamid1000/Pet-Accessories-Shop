@@ -20,12 +20,19 @@
         body{    
     margin: 0;;
     padding: 0;
+    width:100vw;
+    height: 100vh;
     font-family: "Roboto Mono", monospace;
     /* background: linear-gradient(120deg,#29809b,#8e44ad); */
-    background-image: url('./imgs/hero.jpg');
-    background-repeat: no-repeat;
-    background-position: cover;
-    background-size: cover;
+    background-image: url('./imgs/hero2.jpg');
+    /* background-repeat: no-repeat; */
+ background-position: center;
+ background-repeat:no-repeat;
+ background-size: cover;
+ overflow: hidden;
+
+    
+    background-position: center
     height: 100vh;
     font-family:  "Poppins", sans-serif;;
     
@@ -35,7 +42,7 @@
     position: absolute;
     top:50%;
     left: 50%;
-    transform: translate(15%,-50%);
+    transform: translate(-50%,-50%);
     width: 400px;
     background: white;
     border-radius: 10px;
@@ -156,45 +163,7 @@ input[type="submit"]:hover{
     margin-top: 50px;
 }
     </style>
-     <script>
-        function validatepass(){
-            let notice=document.getElementById('notice');
-            
-            let pass=document.getElementById('pass').value;
-            
-           let pass2=document.getElementById('pass2').value;
-
-           console.log(pass)
-           console.log(pass2)
-
-           if(pass!=pass2){
-
-            // alert("Passwords do not match!");
-            notice.innerHTML=`<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>password not match</strong> Enter password carefully!!
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>`
- 
-     
-
-                    return false;
-
-            
-           }
-           else{
-            return true;
-           }
-
-        }
-     
-        
-     
-        
       
-
-    </script>
 </body>
 </head>
 <body>
@@ -202,39 +171,28 @@ input[type="submit"]:hover{
     <div class="advice" id="notice"> </div>
     <div class="center">
         <h1 style="color:black">sign Up</h1>
-        <form onsubmit="return validatepass()" action="./newIndex.php" method="post" >
-            <div class="txt_field">
-                <input type="text" name="" id="" required>
-                <span></span>
-                <label >Username</label>
-            </div>
+        <form  action="./newIndex.php" method="post" >
+           
 
             <div class="txt_field">
                 <input type="email" name="" id="" required>
                 <span></span>
                 <label >Email</label>
             </div>
-
-            <div class="txt_field">
-                <input type="text" name="" id="" required>
-                <span></span>
-                <label >Address</label>
-            </div>
+ 
 
             <div class="txt_field">
                 <input type="password" name="" id="pass" required>
                 <span></span>
                 <label >Password</label>
             </div>
-            <div class="txt_field">
-                <input type="password" name="" id="pass2" required>
-                <span></span>
-                <label >Confirm password</label>
-            </div>
+             
 
-            <div class="pass" style="margin-bottom:1.3rem">
-                <input type="submit" value="Sign in">
-                
+            <div class="pass">
+                <input type="submit" value="Login">
+                <div class="signup_link">
+                     Already a Member?  <a href="/login.php"  id="link" >login here</a>
+                </div>
             </div>
 
         </form>
