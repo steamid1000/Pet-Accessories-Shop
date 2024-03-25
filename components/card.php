@@ -37,7 +37,9 @@
 <body>
   <div class="container">
   <?php 
-      require_once "scripts/db_connect.php";
+      require_once "../scripts/db_connect.php";
+      require_once "../scripts/functions.php";
+
       $result = $conn->query("Select * from products"); // change this query according to the context
       // $result->fetch_assoc();
       while ($row = $result->fetch_assoc()) {
@@ -45,10 +47,10 @@
     ?>
     <a href="#" style="text-decoration: none;">
       <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="pet-parent/bird.jpg" alt="Card image cap">
+        <img class="card-img-top" src="<?php echo "../".$row['product_images']; ?>" alt="Card image cap">
         <div class="card-body">
           <p class="card-text "> <span>
-              <h3>For Dogs</h3>
+              <h3><?php echo getPetCategory($row['pet_category']); ?></h3>
             </span> </p>
           <p class="card-text "> <span><?php echo $row['product_name']; ?></span> </p>
           <div class="d-flex " style="text-align: center; justify-content:left;">
@@ -68,3 +70,13 @@
 </body>
 
 </html>
+
+
+<?php 
+session_start();
+  require_once "../scripts/functions.php";
+  $user = new user(200);
+  $user->setData();
+
+  // $_SESSION['userObj'] = $user;  // we can store the obj in the session
+?>

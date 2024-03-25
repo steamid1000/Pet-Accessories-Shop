@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once "scripts/db_connect.php";
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -83,13 +88,12 @@
 
 
   <!-- Special deals div -->
-  <div class=" deals container-fluid justify-content-center" style="border: 1px solid blue;">
+  <div class=" deals container-fluid">
     <p>Special Deals</p>
-    <div class="row d-flex justify-content-center align-items-center">
+    <div class="row d-flex justify-content-around align-items-around">
     <?php 
-      require_once "scripts/db_connect.php";
+     
       $result = $conn->query("Select * from products");
-      // $result->fetch_assoc();
       while ($row = $result->fetch_assoc()) {
         
     ?>
@@ -112,23 +116,29 @@
   </div>
 
   <!-- this is for Trending products -->
-  <div class=" deals container-fluid justify-content-center" style="border: 1px solid blue;">
+  <div class=" deals container-fluid justify-content-center mt-5 mb-5">
     <p>Pet Essentials</p>
     <div class="row d-flex justify-content-center align-items-center">
+      <?php 
+      $result = $conn->query("Select * from products");
+      while ($row = $result->fetch_assoc()) {
+        ?>
       <a href="#" style="text-decoration: none;">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="pet-parent/bird.jpg" alt="Card image cap">
+          <img class="card-img-top" src="<?php echo $row['product_images']; ?>" alt="Card image cap">
           <div class="card-body">
             <p class="card-text "> <span>
-                <h3>For Cat</h3>
+                <h3>For Dogs</h3>
               </span> </p>
-            <p class="card-text "> <span> product name</span> </p>
+            <p class="card-text "> <span><?php echo $row['product_name']; ?></span> </p>
             <div class="d-flex " style="text-align: center; justify-content:left;">
-              <p class="card-text "> <span style="font-size: 20px; font-weight: 600;">Rs. 8000</span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> RS.10000 </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
+              <p class="card-text "> <span style="font-size: 20px; font-weight: 600;"><?php echo "Rs.". ($row['product_price'] - ($row['product_price'] * 0.10)); ?></span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> <?php echo "RS.". $row['product_price'];?> </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
             </div>
           </div>
         </div>
       </a>
+
+      <?php } ?>
     </div>
   </div>
 
@@ -138,37 +148,27 @@
 
 
   <!-- pet-parent Resources -->
-  <div class="container-fluid " style="border: 1px solid black;">
+  <div class="container-fluid ">
     <div class="row d-flex justify-content-around">
-      <a href="#" style="text-decoration: none;">
-        <div class="card " style="width: 18rem;">
-          <img class="card-img-top" src="./pet-parent/bird.jpg" alt="Card image cap">
-          <div class="card-body">
-            <p class="card-text "> <span>
-                <h3>For Cat</h3>
-              </span> </p>
-            <p class="card-text "> <span> product name</span> </p>
-            <div class="d-flex " style="text-align: center; justify-content:left;">
-              <p class="card-text "> <span style="font-size: 20px; font-weight: 600;">Rs. 8000</span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> RS.10000 </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
-            </div>
-          </div>
-        </div>
-      </a>
+    <?php 
+    $result = $conn->query("Select * from products");
+      while ($row = $result->fetch_assoc()) {
+       ?> 
       <a href="#" style="text-decoration: none;">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="./pet-parent/bird.jpg" alt="Card image cap">
+          <img class="card-img-top" src="<?php echo $row['product_images']; ?>" alt="Card image cap">
           <div class="card-body">
             <p class="card-text "> <span>
-                <h3>For Cat</h3>
+                <h3>For Dogs</h3>
               </span> </p>
-            <p class="card-text "> <span> product name</span> </p>
+            <p class="card-text "> <span><?php echo $row['product_name']; ?></span> </p>
             <div class="d-flex " style="text-align: center; justify-content:left;">
-              <p class="card-text "> <span style="font-size: 20px; font-weight: 600;">Rs. 8000</span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> RS.10000 </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
+              <p class="card-text "> <span style="font-size: 20px; font-weight: 600;"><?php echo "Rs.". ($row['product_price'] - ($row['product_price'] * 0.10)); ?></span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> <?php echo "RS.". $row['product_price'];?> </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
             </div>
           </div>
         </div>
       </a>
-    
+    <?php } ?>
     </div>
   </div>
 

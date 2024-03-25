@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,13 +44,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $feedback = $_POST['feedback'];
 
   $stm = $conn->prepare("insert into feedbacks(feedback_email,feedback) values(?,?)");
-  $stm->bind_param("sss",$feedback_email ,$feedback);
-  if($stm->execute())
+  $stm->bind_param("ss",$feedback_email ,$feedback);
+  if(isset($_SESSION['feedback']) and $_SESSION['feedback'] == false)
   {
-    echo "done";
+    if ($stm->execute()) {
+      
+      $_SESSION['feedbackGiven'] = true;
+      echo "done";
+    }
   }
   else {
-    echo "failed";
+    echo "failed or you have given your feedback plz try again after sometime to give another feedback";
   }
 }
 
