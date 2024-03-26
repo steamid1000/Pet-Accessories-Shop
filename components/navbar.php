@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -57,32 +58,38 @@
 
         <ul class="navbar-nav ">
             <li class="nav-item  mr-3">
-                <?php if (!strpos($_SERVER["REQUEST_URI"], "login.php")) {
+                <?php if (!strpos($_SERVER["REQUEST_URI"], "login.php") and !isset($_SESSION['user_id'])) {
                 ?>
                     <a href="../../Pet-Accessories-Shop/pages/login.php"><button type="button" class="btn btn-info">Login</button></a>
-                <?php  } else { ?>
+                <?php  }
+                if (isset($_SESSION['user_id'])) { ?>
                     <i class="fas fa-dragon">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Profile
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Separated link</a>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Profile
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Recent Orders</a>
+                                <a class="dropdown-item" href="#">My Reviews</a>
+                                <a class="dropdown-item" href="#">Edit Profile</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">logout</a>
+                            </div>
                         </div>
-                    </div>
-                </i>
+                    </i>
                 <?php } ?>
             </li>
-            <?php if (!strpos($_SERVER["REQUEST_URI"], "signup.php")) {
-                ?>
-            <li class="nav-item mr-4">
-                <button type="button" class="btn btn-warning">Sign Up</button>
-              <?php }  ?>
-            </li>
+            <?php if (!strpos($_SERVER["REQUEST_URI"], "signup.php") and !isset($_SESSION['user_id'])) {
+            ?>
+                <li class="nav-item mr-4">
+                    <a href="../../Pet-Accessories-Shop/pages/signup.php"> <button type="button" class="btn btn-warning">Sign Up</button></a>
+                <?php }  ?>
+                </li>
+                <?php if(isset($_SESSION['user_id'])) { ?>
+                <li class="nav-item mr-4">
+                    <a href="../../Pet-Accessories-Shop/scripts/logout.php" ><button type="button" class="btn btn-warning">Logout</button></a>
+                <?php   }?>
+                </li>
 
 
         </ul>

@@ -1,30 +1,63 @@
+<?php
+session_start();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    require_once('../scripts/db_connect.php');
+    $usr = $_POST['user_email'];
+    $pass = $_POST['user_pass'];
 
+    echo $usr;
+    echo $pass . "<br>";
+    $result = $conn->query("select `user_id` from `users` where user_email='$usr' and user_password='$pass'");
+    if ($result != false) {
+        $result = mysqli_fetch_array($result);
+        $_SESSION['user_id'] = $result[0];
+        header('Location:../newindex.php',true);
+    }
+    else {
+        echo "failed";
+        
+    }
+
+
+    
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-
-    <title>Login</title>
-
+   
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Sign Up</title>
     <style>
-
- body{
+        body{    
     margin: 0;;
     padding: 0;
-    font-family: monospace;
-    background: linear-gradient(120deg,#29809b,#8e44ad);
+    width:100vw;
     height: 100vh;
-    background-image: url('./imgs/hero2.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
+    font-family: "Roboto Mono", monospace;
+    /* background: linear-gradient(120deg,#29809b,#8e44ad); */
+    background-image: url('../imgs/hero2.jpg');
+    /* background-repeat: no-repeat; */
+ background-position: center;
+ background-repeat:no-repeat;
+ background-size: cover;
+ overflow: hidden;
+
+    
     background-position: center;
+    height: 100vh;
+    font-family:  "Poppins", sans-serif;;
     
     overflow: hidden;
 }
@@ -39,8 +72,11 @@
 
 }
 .center h1{
-    text-align: center;
+    
     font-family: "Roboto Mono", monospace;
+    
+  /* font-family: "Inter", sans-serif; */
+    text-align: center;
     padding: 0 0 20px 0;
     border-bottom: 1px solid silver;
 }
@@ -60,19 +96,21 @@ margin: 30px 0 ;
     font-size: 16px;
     border: none;
     outline: none;
-    font-family: "Inter", sans-serif;
+    
+  font-family: "Inter", sans-serif;
 
 }
 .txt_field label{
     position: absolute;
     top: 50%;
+    
+  font-family: "Inter", sans-serif;
     left: 5px;
     color: #adadad;
     transform: translateY(-50%);   
     font-size: 16px;
     pointer-events: none;
     transition: .9s;;    
-    font-family: "Inter", sans-serif;
 }
 .txt_field span::before{
     content: '';
@@ -111,7 +149,6 @@ input[type="submit"]{
     color: #e9f4fb;
     font-weight: 700;
     cursor: pointer;
-    font-family: "Inter", sans-serif;
     outline: none;
 
 }
@@ -135,31 +172,55 @@ input[type="submit"]:hover{
     text-decoration: underline;
      
 }
+#notice{
+    width: 80%;
+    height: 44px;
+    /* border: 2px solid blue; */
+    margin-bottom: 15px;
+    margin-top: 5px;
+    margin: auto;
+    margin-top: 5px;
+}
+.center{
+    margin-bottom: -100px;
+    margin-top: 50px;
+}
     </style>
+      
+</body>
 </head>
 <body>
     <?php require_once "../components/navbar.php" ?>
+    <div class="advice" id="notice"> </div>
     <div class="center">
         <h1 style="color:black">Login</h1>
-        <form action="" method="post">
+        <form  action="" method="post" >
+           
+
             <div class="txt_field">
-                <input type="text" name="" id="" required>
+                <input type="email" name="user_email" id="" required>
                 <span></span>
-                <label >username</label>
+                <label >Email</label>
             </div>
+ 
+
             <div class="txt_field">
-                <input type="password" name="" id="" required>
+                <input type="password" name="user_pass" id="pass" required>
                 <span></span>
-                <label >password</label>
+                <label >Password</label>
             </div>
-            <div class="pass">
+             
+
+            <div class="pass mb-4">
                 <input type="submit" value="Login">
-                <div class="signup_link">
-                     not a member?  <a href="#"  id="link" >signup</a>
-                </div>
+                <!-- <div class="signup_link">
+                     Already a Member?  <a href="login.php"  id="link" >login here</a>
+                </div> -->
             </div>
 
         </form>
     </div>
-</body>
+   
 </html>
+
+
