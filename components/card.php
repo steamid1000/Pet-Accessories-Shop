@@ -50,7 +50,7 @@
         <img class="card-img-top" src="<?php echo "../".$row['product_images']; ?>" alt="Card image cap">
         <div class="card-body">
           <p class="card-text "> <span>
-              <h3><?php echo getPetCategory($row['pet_category']); ?></h3>
+              <h3>For <?php echo getPetCategory($row['pet_category']); ?></h3>
             </span> </p>
           <p class="card-text "> <span><?php echo $row['product_name']; ?></span> </p>
           <div class="d-flex " style="text-align: center; justify-content:left;">
@@ -73,10 +73,11 @@
 
 
 <?php 
-session_start();
-  require_once "../scripts/functions.php";
-  $user = new user(200);
-  $user->setData();
+// Below code is experimental for storing the user object into the session array
+// session_start();
+//   require_once "../scripts/functions.php";
+//   $user = new user(200);
+//   $user->setData();
 
-  // $_SESSION['userObj'] = $user;  // we can store the obj in the session
+//   // $_SESSION['userObj'] = $user;  // we can store the obj in the session
 ?>

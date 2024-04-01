@@ -1,3 +1,8 @@
+<?php
+session_start();
+
+?>
+
 <!doctype html>
 <html lang="en">
 <style>
@@ -31,23 +36,35 @@
 </head>
 
 <body>
-  <?php require_once "../components/navbar.php"; ?>
+  <?php 
+  require_once "../components/navbar.php";
+  require_once '../scripts/db_connect.php';
+  require_once '../scripts/functions.php';
+
+ 
+    $productID =  $_GET['productID'];
+
+    $result = $conn->query("select * from products where product_id='$productID'");
+    $result = mysqli_fetch_assoc($result);
+
+    $category = $result['pet_category']; // this is so that we can load similar products below
+  ?>
   
   <div class="container-fluid mt-5 mb-5 ">
     <div class="row col-12">
       <div class=" col-md-8">
         <div class="row">
-          <img src="../imgs/bunny.jpg" class="col-md-6"  style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
-          <img src="../imgs/bird.jpg" class="col-md-6"  style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
+          <img src="<?php echo '../' . $result['product_images']; ?>" class="col-md-6"  style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
+          <img src="<?php echo '../' . $result['product_images']; ?>" class="col-md-6"  style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
         </div>
       </div>
      
 
     <div class="col-md-4">
-        <p id="pname">Pedigree</p>
+        <p id="pname"><?php echo $result['product_name']; ?></p>
         <p>Lorem ipsum dolor sit amet consectetur.</p>
           
-          <p> <span style="font-size: 20px; font-weight: 600;"> Rs.500 </span> <span style="text-decoration: line-through; font-size: 15px; font-weight:100"> MRP Rs.800</span>  <span style="color: orange; font-weight: 600;">(10% OFF)</span></p>
+          <p> <span style="font-size: 20px; font-weight: 600;"><?php echo getDiscountedPrice($result['product_price'],10); ?> </span> <span style="text-decoration: line-through; font-size: 15px; font-weight:100"> MRP Rs.<?php echo $result['product_price'];?></span>  <span style="color: orange; font-weight: 600;">(10% OFF)</span></p>
          <p style="color: green;">Inclusive of all taxes</p>
          <div class="forms">
           <form action="">
@@ -60,7 +77,7 @@
 
    <div class="description mt-3" ></div>
     <p> <span style="font-weight:bold"> Product Details  </span> <span><img width="24" height="24" src="https://img.icons8.com/material-sharp/24/note.png" alt="note"/></span> </p>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis pariatur fugit nesciunt, quia et harum assumenda odio quam commodi deleniti aliquid deserunt iste tenetur aperiam porro, rem at, natus mollitia veniam aliquam voluptatibus ab hic dolorem a? Totam in sunt cupiditate id explicabo, earum natus quaerat ex autem facilis inventore beatae aut veniam fugiat officia delectus, numquam amet quam voluptatum velit! Saepe quaerat a provident deserunt, perferendis cumque non esse beatae consequuntur obcaecati rem debitis aliquam. Voluptatem animi impedit, dicta esse assumenda accusantium veritatis officia a harum expedita quae numquam maxime. Distinctio totam, soluta id dolorum quam doloribus repudiandae repellendus!</p>
+    <p><?php echo $result['product_description']; ?></p>
 
 
   </div>
@@ -72,20 +89,26 @@
   <hr>
   <div class="container-fluid mt-5 mb-5" id="simprod" > 
     <p style="font-size: 1.5rem; font-weight:700;">Similar Products</p>
-    <div class="row d-flex justify-content-between">
-    <a href="#" style="text-decoration: none;">
-    <div class="card" style="width: 18rem;" >
-        <img class="card-img-top" src="../pet parent/bird.jpg" alt="Card image cap">
-        <div class="card-body">
-          <p class="card-text "> <span style="font-size: 1.5rem; font-weight: 600;"> For Cat</span> </p>
-          <p class="card-text "> <span> product name</span> </p>
-          <div class="d-flex " style="text-align: center; justify-content:left;">  
-          <p class="card-text "> <span  style="font-size: 20px; font-weight: 600;">Rs. 8000</span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> RS.10000  </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
+    <?php 
+    $otherProducts = $conn->query("select * from products where pet_category='$category' limit 4");
+    while ($row = mysqli_fetch_assoc($otherProducts)) {
+    ?>
+    <div class="row d-flex justify-content-around">
+    <a href="pages/product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
+        <div class="card" style="width: 18rem;">
+          <img class="card-img-top" src="../<?php echo $row['product_images']; ?>" alt="Card image cap">
+          <div class="card-body">
+            <p class="card-text "> <span>
+            <h3>For <?php echo getPetCategory($row['pet_category']); ?></h3>
+              </span> </p>
+            <p class="card-text "> <span><?php echo $row['product_name']; ?></span> </p>
+            <div class="d-flex " style="text-align: center; justify-content:left;">
+              <p class="card-text "> <span style="font-size: 20px; font-weight: 600;"><?php echo "Rs.". getDiscountedPrice($row['product_price'],10); ?></span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> <?php echo "RS.". $row['product_price'];?> </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
+            </div>
+          </div>
         </div>
-    </div>
-      </div>
-    </a>
-       
+      </a>
+       <?php } ?>
     
       </div>
       
@@ -101,5 +124,4 @@
 
 <?php require_once "../components/footer.php"; ?>
 </body>
-
 </html>

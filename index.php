@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "scripts/db_connect.php";
+require_once 'scripts/functions.php';
 ?>
 
 <!doctype html>
@@ -97,16 +98,16 @@ require_once "scripts/db_connect.php";
       while ($row = $result->fetch_assoc()) {
         
     ?>
-      <a href="#" style="text-decoration: none;">
+      <a href="pages/product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
         <div class="card" style="width: 18rem;">
           <img class="card-img-top" src="<?php echo $row['product_images']; ?>" alt="Card image cap">
           <div class="card-body">
             <p class="card-text "> <span>
-                <h3>For Dogs</h3>
+            <h3>For <?php echo getPetCategory($row['pet_category']); ?></h3>
               </span> </p>
             <p class="card-text "> <span><?php echo $row['product_name']; ?></span> </p>
             <div class="d-flex " style="text-align: center; justify-content:left;">
-              <p class="card-text "> <span style="font-size: 20px; font-weight: 600;"><?php echo "Rs.". ($row['product_price'] - ($row['product_price'] * 0.10)); ?></span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> <?php echo "RS.". $row['product_price'];?> </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
+              <p class="card-text "> <span style="font-size: 20px; font-weight: 600;"><?php echo "Rs.". getDiscountedPrice($row['product_price'],10); ?></span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> <?php echo "RS.". $row['product_price'];?> </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
             </div>
           </div>
         </div>
@@ -128,11 +129,11 @@ require_once "scripts/db_connect.php";
           <img class="card-img-top" src="<?php echo $row['product_images']; ?>" alt="Card image cap">
           <div class="card-body">
             <p class="card-text "> <span>
-                <h3>For Dogs</h3>
+            <h3>For <?php echo getPetCategory($row['pet_category']); ?></h3>
               </span> </p>
             <p class="card-text "> <span><?php echo $row['product_name']; ?></span> </p>
             <div class="d-flex " style="text-align: center; justify-content:left;">
-              <p class="card-text "> <span style="font-size: 20px; font-weight: 600;"><?php echo "Rs.". ($row['product_price'] - ($row['product_price'] * 0.10)); ?></span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> <?php echo "RS.". $row['product_price'];?> </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
+              <p class="card-text "> <span style="font-size: 20px; font-weight: 600;"><?php echo "Rs.". getDiscountedPrice($row['product_price'],10); ?></span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> <?php echo "RS.". $row['product_price'];?> </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
             </div>
           </div>
         </div>
@@ -159,11 +160,11 @@ require_once "scripts/db_connect.php";
           <img class="card-img-top" src="<?php echo $row['product_images']; ?>" alt="Card image cap">
           <div class="card-body">
             <p class="card-text "> <span>
-                <h3>For Dogs</h3>
+                <h3>For <?php echo getPetCategory($row['pet_category']); ?></h3>
               </span> </p>
             <p class="card-text "> <span><?php echo $row['product_name']; ?></span> </p>
             <div class="d-flex " style="text-align: center; justify-content:left;">
-              <p class="card-text "> <span style="font-size: 20px; font-weight: 600;"><?php echo "Rs.". ($row['product_price'] - ($row['product_price'] * 0.10)); ?></span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> <?php echo "RS.". $row['product_price'];?> </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
+              <p class="card-text "> <span style="font-size: 20px; font-weight: 600;"><?php echo "Rs.". getDiscountedPrice($row['product_price'],10); ?></span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> <?php echo "RS.". $row['product_price'];?> </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
             </div>
           </div>
         </div>
@@ -200,6 +201,7 @@ require_once "scripts/db_connect.php";
       scrollContainer.style.scrollBehavior = "smooth";
       scrollContainer.scrollLeft += -1200;
     })
+
   </script>
 </body>
 

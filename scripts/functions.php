@@ -32,6 +32,11 @@ function getProductCategory($index){
     }
 }
 
+function getDiscountedPrice($price,$discount){ // return the discounted price of the product
+    return ($price - ($price / $discount));
+}
+
+
 
 // a trial version of the user class
 class user{ // we can store the user data instead of fetching the details every time we need from the database
