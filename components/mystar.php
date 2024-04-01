@@ -16,13 +16,25 @@
     <title>Document</title>
 </head>
 <body>
- <div class="mystars" id="star">   
-    <span class="fa fa-star " id="1"  ></span>
+    <?php include_once "navbar.php" ?>
+    <form action="" method="post">
+        <div class="container">
+ <div class="mystars mr-5" id="star">   
+    <span class="fa fa-star " id="1"></span>
     <span class="fa fa-star " id="2"></span>
     <span class="fa fa-star " id="3"></span> 
     <span class="fa fa-star" id="4"></span>
     <span class="fa fa-star" id="5" ></span>
 </div>
+    <div class="review row">
+        <input type="textarea" class="form-control" style="width:40%;height:50%;" name="review" placeholder="Write your experience about the product">
+        <button class="btn btn-warning" type="submit">Submit Review</button>
+    </div>
+    </form>
+    </div>
+
+
+
 <script>
     const stars = document.querySelectorAll('.fa');
     let newItem,len ,yellowStar;

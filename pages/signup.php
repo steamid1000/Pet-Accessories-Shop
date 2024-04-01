@@ -1,5 +1,16 @@
 <?php
 session_start();
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    require_once '../scripts/db_connect.php';
+    $stmt = $conn->prepare("INSERT INTO users(user_name,user_email,user_password) VALUES(?,?,?)");
+    $stmt->bind_param("sss",$_POST['userName'],$_POST['userEmail'],$_POST['userPassword']);
+    if ($stmt->execute() == true) {
+        echo "<script> alert('Signup successfull'); </script>";
+        header("Location:login.php");
+        exit;
+    }
+}
 ?>
 <!DOCTYPE html>
  <html lang="en">
@@ -224,27 +235,21 @@ session_start();
      <div class="advice" id="notice"> </div>
      <div class="center">
          <h1 style="color:black;">Sign Up</h1>
-         <form onsubmit="return validatepass()" action="./newIndex.php" method="post">
+         <form onsubmit="return validatepass()" action="" method="post">
              <div class="txt_field">
-                 <input type="text" name="" id="" required>
+                 <input type="text" name="userName" id="" required>
                  <span></span>
-                 <label>Username</label>
+                 <label>Name</label>
              </div>
 
              <div class="txt_field">
-                 <input type="email" name="" id="" required>
+                 <input type="email" name="userEmail" id="" required>
                  <span></span>
                  <label>Email</label>
              </div>
 
              <div class="txt_field">
-                 <input type="text" name="" id="" required>
-                 <span></span>
-                 <label>Address</label>
-             </div>
-
-             <div class="txt_field">
-                 <input type="password" name="" id="pass" required>
+                 <input type="password" name="userPassword" id="pass" required>
                  <span></span>
                  <label>Password</label>
              </div>
@@ -255,7 +260,7 @@ session_start();
              </div>
 
              <div class="pass" style="margin-bottom:1.3rem">
-                 <input type="submit" value="Sign in">
+                 <input type="submit" value="Sign Up">
 
              </div>
 
