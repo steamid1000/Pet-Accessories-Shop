@@ -94,13 +94,13 @@ require_once 'scripts/functions.php';
     <div class="row d-flex justify-content-around align-items-around">
     <?php 
      
-      $result = $conn->query("Select * from products");
+      $result = $conn->query("Select * from products limit 4");
       while ($row = $result->fetch_assoc()) {
         
     ?>
       <a href="pages/product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="<?php echo $row['product_images']; ?>" alt="Card image cap">
+          <img class="card-img-top" src="<?php echo $row['product_images'] ?>" alt="product images">
           <div class="card-body">
             <p class="card-text "> <span>
             <h3>For <?php echo getPetCategory($row['pet_category']); ?></h3>
@@ -121,7 +121,7 @@ require_once 'scripts/functions.php';
     <p>Pet Essentials</p>
     <div class="row d-flex justify-content-center align-items-center">
       <?php 
-      $result = $conn->query("Select * from products");
+      $result = $conn->query("Select * from products limit 4");
       while ($row = $result->fetch_assoc()) {
         ?>
       <a href="#" style="text-decoration: none;">
@@ -152,7 +152,7 @@ require_once 'scripts/functions.php';
   <div class="container-fluid ">
     <div class="row d-flex justify-content-around">
     <?php 
-    $result = $conn->query("Select * from products");
+    $result = $conn->query("Select * from products limit 4");
       while ($row = $result->fetch_assoc()) {
        ?> 
       <a href="#" style="text-decoration: none;">

@@ -54,8 +54,8 @@ session_start();
     <div class="row col-12">
       <div class=" col-md-8">
         <div class="row">
-          <img src="<?php echo '../' . $result['product_images']; ?>" class="col-md-6"  style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
-          <img src="<?php echo '../' . $result['product_images']; ?>" class="col-md-6"  style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
+          <img src="<?php echo $result['product_images']; ?>" class="col-md-6"  style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
+          <img src="<?php echo $result['product_images']; ?>" class="col-md-6"  style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
         </div>
       </div>
      
@@ -96,7 +96,7 @@ session_start();
     <div class="row d-flex justify-content-around">
     <a href="pages/product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
         <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="../<?php echo $row['product_images']; ?>" alt="Card image cap">
+          <img class="card-img-top" src="<?php echo $row['product_images']; ?>" alt="Card image cap">
           <div class="card-body">
             <p class="card-text "> <span>
             <h3>For <?php echo getPetCategory($row['pet_category']); ?></h3>

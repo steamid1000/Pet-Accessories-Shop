@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result != false) {
         $result = mysqli_fetch_array($result);
         $_SESSION['user_id'] = $result[0];
-        header('Location:../newindex.php',true);
+        header('Location:../index.php',true);
     }
     else {
         echo "failed";

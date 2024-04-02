@@ -2,5 +2,5 @@
 session_start();
 
 session_destroy();
-header("Location:../newindex.php");
+header("Location:../index.php");
 ?>

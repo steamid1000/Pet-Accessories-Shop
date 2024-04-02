@@ -4,6 +4,8 @@
 
 function getPetCategory($index){
     switch ($index) {
+        case -1:
+            return "Both";
         case 0:
             return "Cats";
         case 1:
@@ -22,11 +24,27 @@ function getPetCategory($index){
 function getProductCategory($index){
     switch ($index) {
         case 0:
-            return "Food";
+            return "Toys";
         case 1:
-            return "Clothes";
+            return "Safety";
         case 2:
-            return "Leashes";
+            return "Bedding";
+        case 3:
+            return "Fashion";
+        case 4:
+            return "Feeding";
+        case 5:
+            return "Walking";
+        case 6:
+            return "Grooming";
+        case 7:
+            return "Litter & Cleanup";
+        case 8:
+            return "Outdoor Gear";
+        case 9:
+            return "Travel";
+        case 10:
+            return "Furniture";
         default:
             return "Other";
     }

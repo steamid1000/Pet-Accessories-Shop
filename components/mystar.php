@@ -25,9 +25,10 @@
     <span class="fa fa-star " id="3"></span> 
     <span class="fa fa-star" id="4"></span>
     <span class="fa fa-star" id="5" ></span>
+    <input type="hidden" value="0">
 </div>
     <div class="review row">
-        <input type="textarea" class="form-control" style="width:40%;height:50%;" name="review" placeholder="Write your experience about the product">
+        <input type="textarea" class="form-control" style="width:40%;height:5.2rem;" name="review" placeholder="Write your experience about the product">
         <button class="btn btn-warning" type="submit">Submit Review</button>
     </div>
     </form>
