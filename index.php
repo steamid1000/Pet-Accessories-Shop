@@ -91,22 +91,22 @@ require_once 'scripts/functions.php';
   <!-- Special deals div -->
   <div class=" deals container-fluid">
     <p>Special Deals</p>
-    <div class="row d-flex justify-content-around align-items-around">
+    <div class="row d-flex justify-content-around align-items-around" >
     <?php 
      
-      $result = $conn->query("Select * from products limit 4");
+      $result = $conn->query("Select * from products where pet_category=0 limit 4");
       while ($row = $result->fetch_assoc()) {
         
     ?>
       <a href="pages/product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="<?php echo $row['product_images'] ?>" alt="product images">
-          <div class="card-body">
-            <p class="card-text "> <span>
+        <div class="card" style="width: 20rem;  max-height: 95%;">
+          <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;" src="<?php echo getImageName($row['product_images']); ?>" alt="product images">
+          
+          <div class="card-body" style="position:relative;">  
             <h3>For <?php echo getPetCategory($row['pet_category']); ?></h3>
               </span> </p>
             <p class="card-text "> <span><?php echo $row['product_name']; ?></span> </p>
-            <div class="d-flex " style="text-align: center; justify-content:left;">
+            <div class="d-flex " style="text-align: center; justify-content:left; >
               <p class="card-text "> <span style="font-size: 20px; font-weight: 600;"><?php echo "Rs.". getDiscountedPrice($row['product_price'],10); ?></span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> <?php echo "RS.". $row['product_price'];?> </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
             </div>
           </div>
@@ -115,19 +115,26 @@ require_once 'scripts/functions.php';
         <?php } ?>
     </div>
   </div>
+<hr>
+ 
 
-  <!-- this is for Trending products -->
-  <div class=" deals container-fluid justify-content-center mt-5 mb-5">
-    <p>Pet Essentials</p>
-    <div class="row d-flex justify-content-center align-items-center">
+  
+ 
+
+
+  <div class=" deals container-fluid  mt-5">
+  <p>Trending Now</p>
+  
+    <div class="row d-flex justify-content-around align-items-around">
+    
       <?php 
-      $result = $conn->query("Select * from products limit 4");
+      $result = $conn->query("Select * from products where pet_category=1 limit 4");
       while ($row = $result->fetch_assoc()) {
         ?>
       <a href="#" style="text-decoration: none;">
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="<?php echo $row['product_images']; ?>" alt="Card image cap">
-          <div class="card-body">
+        <div class="card" style="width: 20rem;  max-height: 95%;">
+          <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;" src="<?php echo getImageName($row['product_images']); ?>" alt="Card image cap">
+          <div class="card-body" style="position:relative;">
             <p class="card-text "> <span>
             <h3>For <?php echo getPetCategory($row['pet_category']); ?></h3>
               </span> </p>
@@ -142,23 +149,25 @@ require_once 'scripts/functions.php';
       <?php } ?>
     </div>
   </div>
-
+  <hr>
+  
   <!-- this is end of Trending products -->
 
 
-
+ 
 
   <!-- pet-parent Resources -->
-  <div class="container-fluid ">
-    <div class="row d-flex justify-content-around">
+  <div class="deals container-fluid  mt-5 ">
+  <p>Special Deals</p>
+    <div class="row d-flex justify-content-around align-items-around">
     <?php 
     $result = $conn->query("Select * from products limit 4");
       while ($row = $result->fetch_assoc()) {
        ?> 
       <a href="#" style="text-decoration: none;">
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="<?php echo $row['product_images']; ?>" alt="Card image cap">
-          <div class="card-body">
+        <div class="card" style="width: 20rem;  max-height: 95%;">
+          <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;" src="<?php echo getImageName($row['product_images']); ?>" alt="Card image cap">
+          <div class="card-body" style="position:relative;">
             <p class="card-text "> <span>
                 <h3>For <?php echo getPetCategory($row['pet_category']); ?></h3>
               </span> </p>

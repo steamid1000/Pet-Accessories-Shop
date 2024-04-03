@@ -5,10 +5,15 @@ session_start();
 
 <!doctype html>
 <html lang="en">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
 <style>
   .card:hover{
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         
+    }
+    .checked{    
+        color: orange;
     }
     a:link{text-decoration: none;}
     .card{
@@ -22,8 +27,35 @@ session_start();
     }
     overflow: hidden;
   }
-
  
+ form ::placeholder{
+   
+  font-size: 20px;
+  
+  left: ;
+  margin-left: 150px;
+
+ }
+ .mystars span{
+  font-size: 3rem;;
+  margin-left: 1rem;
+ }
+ #reviewform .review::placeholder {
+  color: red;
+}
+#submitbtn{
+  position: relative;
+  width: 300px;;
+  border-radius: 11px;
+  margin-left: 3.3rem;
+  height: 45px;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+  background-color: #50C878;
+  color: black;
+  font-size:1.2rem;
+
+}
   
 </style>
 <head>
@@ -50,12 +82,13 @@ session_start();
     $category = $result['pet_category']; // this is so that we can load similar products below
   ?>
   
+
   <div class="container-fluid mt-5 mb-5 ">
     <div class="row col-12">
       <div class=" col-md-8">
         <div class="row">
-          <img src="<?php echo $result['product_images']; ?>" class="col-md-6"  style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
-          <img src="<?php echo $result['product_images']; ?>" class="col-md-6"  style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
+          <img src="<?php echo getImageName($result['product_images']); ?>" class="col-md-6"  style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
+          <img src="<?php echo getImageName($result['product_images2']); ?>" class="col-md-6"  style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
         </div>
       </div>
      
@@ -85,36 +118,83 @@ session_start();
    
       </div>
   </div>
+<hr>
+ 
+<!-- this is the rating section  -->
+
+<div class="container-fluid"  >
+
+<div class="d-flex container justify-content-around"  >
+ <div class="imgs mb-5" style="align-items: left;">
+ <p  class="mt-5 mb-3" style="text-align:center; font-size:2rem; font-weight:700">How was your Product Experience?</p>
+ <img src="../imgs/reviewme.png"  alt="" style="width:300px;margin-left:6rem"> </div>
+<div class="stars"> 
+
+
+<form  action="" id="reviewform" class="mt-5"  method="post">
+        
+ <div class="mystars mr-5" id="star">   
+    <span class="fa fa-star " id="1"></span>
+    <span class="fa fa-star " id="2"></span>
+    <span class="fa fa-star " id="3"></span> 
+    <span class="fa fa-star" id="4"></span>
+    <span class="fa fa-star" id="5" ></span>
+    <input type="hidden" value="0">
+</div>
+    <div class="review row">
+        <input type="textarea" class="form-control mt-5 " style="width:80%;height:10rem; margin:auto" name="review" placeholder="share Feedback...">
+        
+      </div>
+      <button class="submit" id="submitbtn"  >Submit Review</button>
+    </form>
+    </div>
+
+
+
+             </div>
+
+</div>
+ 
+
+
+
+
+
+
+
+
+
+
+
 
   <hr>
-  <div class="container-fluid mt-5 mb-5" id="simprod" > 
-    <p style="font-size: 1.5rem; font-weight:700;">Similar Products</p>
+  <div class=" deals container-fluid mt-5">
+    <p style="font-size:1.5rem;font-weight: 600;" >Special Deals</p>
+    <div class="row d-flex justify-content-around align-items-around" >
     <?php 
-    $otherProducts = $conn->query("select * from products where pet_category='$category' limit 4");
-    while ($row = mysqli_fetch_assoc($otherProducts)) {
+  
+      $result = $conn->query("Select * from products where pet_category=$category limit 4");
+      while ($row = $result->fetch_assoc()) {
+        
     ?>
-    <div class="row d-flex justify-content-around">
-    <a href="pages/product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
-        <div class="card" style="width: 18rem;">
-          <img class="card-img-top" src="<?php echo $row['product_images']; ?>" alt="Card image cap">
-          <div class="card-body">
-            <p class="card-text "> <span>
+      <a href="product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
+        <div class="card" style="width: 20rem;  max-height: 100%;">
+          <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;" src="<?php echo getImageName($row['product_images']); ?>" alt="product images">
+          
+          <div class="card-body" style="position:relative;">  
             <h3>For <?php echo getPetCategory($row['pet_category']); ?></h3>
               </span> </p>
             <p class="card-text "> <span><?php echo $row['product_name']; ?></span> </p>
-            <div class="d-flex " style="text-align: center; justify-content:left;">
+            <div class="d-flex " style="text-align: center; justify-content:left; >
               <p class="card-text "> <span style="font-size: 20px; font-weight: 600;"><?php echo "Rs.". getDiscountedPrice($row['product_price'],10); ?></span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;"> <?php echo "RS.". $row['product_price'];?> </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
             </div>
           </div>
         </div>
       </a>
-       <?php } ?>
-    
-      </div>
-      
+        <?php } ?>
     </div>
   </div>
-  
+<hr>
 
  
 
@@ -123,5 +203,51 @@ session_start();
 
 
 <?php require_once "../components/footer.php"; ?>
+
+
+<script>
+const stars = document.querySelectorAll('.fa');
+    let newItem,len ,yellowStar;
+ 
+    stars.forEach(eachStar=>{
+        eachStar.addEventListener('click',function(){
+            newItem=this.id;
+         
+            // let htmlId=document.getElementById(newItem);
+            // htmlId.classList.add('checked')
+             len=parseInt(newItem);
+
+             colorme();
+            
+            
+        })
+         
+    })
+   
+    colorme=()=>{
+        while(len>0){
+         yellowStar=document.getElementById(len);
+         yellowStar.classList.add('checked')
+         len--;
+
+         
+
+    }
+
+    }
+   
+    
+
+         
+
+         
+         
+        
+       
+
+
+       
+ 
+</script>
 </body>
 </html>

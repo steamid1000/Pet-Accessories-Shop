@@ -54,7 +54,17 @@ function getDiscountedPrice($price,$discount){ // return the discounted price of
     return ($price - ($price / $discount));
 }
 
-
+//functions to remove the extra tags from the image base64 string
+function getImageName($current_name){
+    if (str_contains($current_name,"<img src")){
+        $img_name = substr($current_name,10);
+        $img_name = substr($img_name,0,strlen($img_name)-3);
+        return $img_name;
+      }
+      else {
+        return $current_name;
+      } 
+}
 
 // a trial version of the user class
 class user{ // we can store the user data instead of fetching the details every time we need from the database
