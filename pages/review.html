@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>Document</title>
+    <style>
+      .login button a {
+        color: black;
+      }
+      .login button:nth-child(1) a {
+        color: black;
+        font-weight: 700;
+      }
+      .login button:nth-child(2) a {
+        color: white;
+        font-weight: 700;
+      }
+
+      .reviewme .row .stars span {
+        font-size: 3rem;
+        margin-left: 1rem;
+      }
+      .rating-container {
+        margin-bottom: 20px;
+    }
+
+    .rating-bar {
+        width: 200px;
+        height: 1.2rem;
+        background-color: #ddd;
+        margin-bottom: 5px;
+        border-radius: 1rem;
+    }
+
+    .filled-bar {
+        height: 100%;
+        background-color: #FFD700;
+        border-radius: 15px;
+    }
+    #one,#two,#three,#four,#five{
+      font-size: 2rem;
+      margin-left: 5px;
+      margin-right: 1.2rem;
+    }
+    .starline p{
+      font-size:1.6rem;
+      position: relative;
+      margin-left: 127px;
+      /* border: 2px solid blue; */
+      box-sizing:content-box
+    }
+    .card{
+      box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    }
+   
+     
+    </style>
+  </head>
+  <body>
+    <div class="container " style="height: 550px;">
+      <hr />
+      <div class="navcontainer d-flex justify-content-between">
+        <div class="logoimg">
+          <img src="../imgs/shopicon.png" alt="" style="width: 50px" />
+        </div>
+        <div class="login">
+          <button type="button " class="btn btn-light mr-3">
+            <a class="text-decoration-none" href="#">login</a>
+          </button>
+          <button type="button" class="btn btn-dark rounded-top rounded-bottom">
+            <a class="text-decoration-none" href="#">Signup</a>
+          </button>
+        </div>
+      </div>
+      <hr />
+      <div class="reviewme d-flex">
+        <div class="row" >
+          <div class="col-sm stars  text-center">
+            <span class="fa fa-star" id="1"></span>
+            <span class="fa fa-star" id="2"></span>
+            <span class="fa fa-star" id="3"></span>
+            <span class="fa fa-star" id="4"></span>
+            <span class="fa fa-star" id="5"></span>
+            <div class="starline">
+              <div style="font-size: 15px;" class="row d-flex flex-row mt-4">
+                <div class="name d-flex"> <p>5</p> <span class="fa fa-star" id="one"></span></div>
+                <div class="rating-bar">
+                    <div class="filled-bar" style="width: 80%;"></div>
+                </div>
+                
+            </div>
+              <div class="row d-flex flex-row mt-3">
+                <div class="name d-flex" >  <p>4</p>    <span class="fa fa-star" id="two"></span></div>
+                <div class="rating-bar">
+                    <div class="filled-bar" style="width: 80%;"></div>
+                </div>
+                
+            </div>
+              <div class="row d-flex flex-row mt-3">
+                <div class="name d-flex">  <p>3</p>  <span class="fa fa-star" id="three"></span></div>
+                <div class="rating-bar">
+                    <div class="filled-bar" style="width: 80%;"></div>
+                </div>
+                
+            </div>
+              <div class="row d-flex flex-row mt-3">
+                <div class="name d-flex">   <p>2</p>  <span class="fa fa-star" id="four"></span></div>
+                <div class="rating-bar">
+                    <div class="filled-bar" style="width: 80%;"></div>
+                </div>
+                
+            </div>
+              <div class="row d-flex flex-row mt-3">
+                <div class="name d-flex">  <div class="d-flex" style=" margin-bottom: 25px;"><p>1</p>  <span class="fa fa-star" id="five"></span></div> </div>
+                <div class="rating-bar">
+                    <div class="filled-bar" style="width: 80%;"></div>
+                </div>
+                
+            </div>
+            </div>
+          </div>
+
+          <div class="col-sm reviews " id="rightdiv" style="max-height: 28.1215rem;" >
+            <div class="scrollme" style="width: 100%;; height: 100%; overflow-Y: scroll; overflow-x: hidden;">  
+            <!-- this is cards here -->
+            <div class="card mt-4 mb-4 " style=" text-align: center;" >
+              <div class="row d-flex justify-content-between mb-3 mt-2">
+                  <div class="img d-flex align-items-center" >  <img  style="width: 2.5rem; margin-left: 1.3rem;" src="../imgs/back.png" alt=""> <p style="margin-left: 1rem; text-transform: capitalize; font-style: italic;">Peter Parker</p> </div>
+                  <div class="date" style="margin-right: 1.9rem;"> <p> 10/05/2005</p> </div>
+  
+                   
+              </div>
+               <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure, commodi corrupti aut facere voluptatibus hic? Hic temporibus, reiciendis adipisci nobis labore excepturi ipsum dolor autem aliquam, iure pariatur! Vel, deserunt.</p>
+          </div>
+          <!-- this is review card  -->
+            <div class="card mt-4 mb-4 " style=" text-align: center;" >
+              <div class="row d-flex justify-content-between mb-5 mt-2">
+                  <div class="img d-flex align-items-center" >  <img  style="width: 2.5rem; margin-left: 1.3rem;" src="../imgs/back.png" alt=""> <p style="margin-left: 1rem; text-transform: capitalize; font-style: italic;">Peter Parker</p> </div>
+                  <div class="date" style="margin-right: 1.9rem;"> <p> 10/05/2005</p> </div>
+  
+                   
+              </div>
+               <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure, commodi corrupti aut facere voluptatibus hic? Hic temporibus, reiciendis adipisci nobis labore excepturi ipsum dolor autem aliquam, iure pariatur! Vel, deserunt.</p>
+          </div>
+
+          <!-- this is card for review -->
+            <div class="card mt-4 mb-4 " style=" text-align: center;" >
+              <div class="row d-flex justify-content-between mb-3 mt-2">
+                  <div class="img d-flex align-items-center" >  <img  style="width: 2.5rem; margin-left: 1.3rem;" src="../imgs/back.png" alt=""> <p style="margin-left: 1rem; text-transform: capitalize; font-style: italic;">Peter Parker</p> </div>
+                  <div class="date" style="margin-right: 1.9rem;"> <p> 10/05/2005</p> </div>
+  
+                   
+              </div>
+               <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure, commodi corrupti aut facere voluptatibus hic? Hic temporibus, reiciendis adipisci nobis labore excepturi ipsum dolor autem aliquam, iure pariatur! Vel, deserunt.</p>
+          </div>
+            <div class="card mt-4 mb-4 " style=" text-align: center;" >
+              <div class="row d-flex justify-content-between mb-3 mt-2">
+                  <div class="img d-flex align-items-center" >  <img  style="width: 2.5rem; margin-left: 1.3rem;" src="../imgs/back.png" alt=""> <p style="margin-left: 1rem; text-transform: capitalize; font-style: italic;">Peter Parker</p> </div>
+                  <div class="date" style="margin-right: 1.9rem;"> <p> 10/05/2005</p> </div>
+  
+                   
+              </div>
+               <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure, commodi corrupti aut facere voluptatibus hic? Hic temporibus, reiciendis adipisci nobis labore excepturi ipsum dolor autem aliquam, iure pariatur! Vel, deserunt.</p>
+          </div>
+            
+            
+            <!-- this is cards here -->
+             
+          </div>
+        </div>
+        </div>
+      </div>
+      <hr>
+    </div>
+  </body>
+</html>
