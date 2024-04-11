@@ -78,16 +78,10 @@ require_once 'scripts/functions.php';
     </div>
   </div>
 
-  </div>
+
 
 
   <?php require_once "components/pets.php" ?>
-
-
-
-
-
-
 
   <!-- Special deals div -->
   <div class=" deals container-fluid">
