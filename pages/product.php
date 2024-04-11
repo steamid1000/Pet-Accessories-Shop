@@ -32,7 +32,7 @@ session_start();
    
   font-size: 20px;
   
-  left: ;
+  /* left: ; */
   margin-left: 150px;
 
  }
@@ -64,7 +64,7 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
  
-  <title>PRoduct !</title>
+  <title>Product Page</title>
 </head>
 
 <body>
@@ -122,6 +122,16 @@ session_start();
  
 <!-- this is the rating section  -->
 
+<?php // rating option will only be give to users that have placed the order and not given the review earlier
+  $isOrdered = $conn->query("select user_id from orders where product_id=$productID");
+  $isOrdered = mysqli_fetch_array($isOrdered);
+
+  $isReviewed = $conn->query("select user_id from orders where product_id=$productID");
+  $isReviewed = mysqli_fetch_array($isReviewed);
+
+  if (($isOrdered == null or $isReviewed==null) or ((isset($_SESSION['user_id']) and array_search($_SESSION['user_id'],$isOrdered)  == false)) or (isset($_SESSION['user_id']) and array_search($_SESSION['user_id'],$isReviewed)  == false)) {
+    
+?>
 <div class="container-fluid"  >
 
 <div class="d-flex container justify-content-around"  >
@@ -155,7 +165,7 @@ session_start();
 
 </div>
  
-
+<?php } ?>
 
 
 
