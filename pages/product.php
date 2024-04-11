@@ -37,11 +37,11 @@ session_start();
 
     overflow: hidden;
   }
- 
- form ::placeholder{
-   
-  font-size: 20px;
-  margin-left: 150px;
+
+  form ::placeholder {
+
+    font-size: 20px;
+    margin-left: 150px;
 
   }
 
@@ -156,7 +156,7 @@ session_start();
   $category = $result['pet_category']; // this is so that we can load similar products below
   
 
- 
+
 
   ?>
 
@@ -192,7 +192,7 @@ session_start();
           </form>
         </div>
         <hr>
-        <button type="submit" class="btn btn-primary mt-4 ml-0"
+        <button type="submit" class="btn btn-primary mt-4 ml-0" data-toggle="modal" data-target="#exampleModal"
           style="width: 252px; background-color:orange; border-radius:5px;height:45px"> <span> Buy Now</span> <span
             class="ml-4"> <img width="30" height="30" src="https://img.icons8.com/pastel-glyph/64/cat--v3.png"
               alt="cat--v3" /></span> </button>
@@ -233,87 +233,87 @@ session_start();
           <span class="fa fa-star"></span>
           <span class="fa fa-star"></span>
         </div>
-          <div class="starline">
-            <div style="font-size: 15px;" class="row d-flex flex-row mt-4">
-              <div class="name d-flex">
-                <p>5</p> <span class="fa fa-star" id="one"></span>
-              </div>
-              <div class="rating-bar">
-                <div class="filled-bar" style="width: 80%;"></div>
-              </div>
-
+        <div class="starline">
+          <div style="font-size: 15px;" class="row d-flex flex-row mt-4">
+            <div class="name d-flex">
+              <p>5</p> <span class="fa fa-star" id="one"></span>
             </div>
-            <div class="row d-flex flex-row mt-3">
-              <div class="name d-flex">
-                <p>4</p> <span class="fa fa-star" id="two"></span>
-              </div>
-              <div class="rating-bar">
-                <div class="filled-bar" style="width: 80%;"></div>
-              </div>
-
+            <div class="rating-bar">
+              <div class="filled-bar" style="width: 80%;"></div>
             </div>
-            <div class="row d-flex flex-row mt-3">
-              <div class="name d-flex">
-                <p>3</p> <span class="fa fa-star" id="three"></span>
-              </div>
-              <div class="rating-bar">
-                <div class="filled-bar" style="width: 80%;"></div>
-              </div>
 
-            </div>
-            <div class="row d-flex flex-row mt-3">
-              <div class="name d-flex">
-                <p>2</p> <span class="fa fa-star" id="four"></span>
-              </div>
-              <div class="rating-bar">
-                <div class="filled-bar" style="width: 80%;"></div>
-              </div>
-
-            </div>
-            <div class="row d-flex flex-row mt-3">
-              <div class="name d-flex">
-                <div class="d-flex" style=" margin-bottom: 25px;">
-                  <p>1</p> <span class="fa fa-star" id="five"></span>
-                </div>
-              </div>
-              <div class="rating-bar">
-                <div class="filled-bar" style="width: 80%;"></div>
-              </div>
-
-            </div>
           </div>
-        </div>
+          <div class="row d-flex flex-row mt-3">
+            <div class="name d-flex">
+              <p>4</p> <span class="fa fa-star" id="two"></span>
+            </div>
+            <div class="rating-bar">
+              <div class="filled-bar" style="width: 80%;"></div>
+            </div>
 
-        <div class="col-sm reviews " id="rightdiv" style="max-height: 28.1215rem;">
-          <div class="scrollme" style="width: 100%;; height: 100%; overflow-Y: scroll; overflow-x: hidden;">
-            <?php
+          </div>
+          <div class="row d-flex flex-row mt-3">
+            <div class="name d-flex">
+              <p>3</p> <span class="fa fa-star" id="three"></span>
+            </div>
+            <div class="rating-bar">
+              <div class="filled-bar" style="width: 80%;"></div>
+            </div>
 
-            $cardResult = $conn->query("select * from feedbacks");
-            while ($feedbackRow = $cardResult->fetch_assoc()) {
-            
-              // Start PHP code
-              echo '<div class="card mt-4 mb-4" style="text-align: center; border:1px solid grey;min-width:600px; margin-left:6rem">' .
-                '<div class="row d-flex justify-content-between mb-3 mt-2">' .
-                '<div class="img d-flex align-items-center">' .
-                '<img style="width: 2.5rem; margin-left: 1.3rem;" src="../imgs/back.png" alt="">' .
-                '<p style="margin-left: 1rem; text-transform: capitalize; font-style: italic;">' . $feedbackRow['feedback_email'] . '</p>' .
-                '</div>' .
-                '<div class="date" style="margin-right: 1.9rem;">' .
-                '<p>' . $feedbackRow["date"] . '</p>' .
-                '</div>' .
-                '</div>' .
-                '<p class="ml-1 mr-1">' . $feedbackRow['feedback'] . '</p>' .
-                '</div>';
-              // End PHP code
-            
-            }
-            ?>
+          </div>
+          <div class="row d-flex flex-row mt-3">
+            <div class="name d-flex">
+              <p>2</p> <span class="fa fa-star" id="four"></span>
+            </div>
+            <div class="rating-bar">
+              <div class="filled-bar" style="width: 80%;"></div>
+            </div>
+
+          </div>
+          <div class="row d-flex flex-row mt-3">
+            <div class="name d-flex">
+              <div class="d-flex" style=" margin-bottom: 25px;">
+                <p>1</p> <span class="fa fa-star" id="five"></span>
+              </div>
+            </div>
+            <div class="rating-bar">
+              <div class="filled-bar" style="width: 80%;"></div>
+            </div>
 
           </div>
         </div>
       </div>
+
+      <div class="col-sm reviews " id="rightdiv" style="max-height: 28.1215rem;">
+        <div class="scrollme" style="width: 100%;; height: 100%; overflow-Y: scroll; overflow-x: hidden;">
+          <?php
+
+          $cardResult = $conn->query("select * from feedbacks");
+          while ($feedbackRow = $cardResult->fetch_assoc()) {
+
+            // Start PHP code
+            echo '<div class="card mt-4 mb-4" style="text-align: center; border:1px solid grey;min-width:600px; margin-left:6rem">' .
+              '<div class="row d-flex justify-content-between mb-3 mt-2">' .
+              '<div class="img d-flex align-items-center">' .
+              '<img style="width: 2.5rem; margin-left: 1.3rem;" src="../imgs/back.png" alt="">' .
+              '<p style="margin-left: 1rem; text-transform: capitalize; font-style: italic;">' . $feedbackRow['feedback_email'] . '</p>' .
+              '</div>' .
+              '<div class="date" style="margin-right: 1.9rem;">' .
+              '<p>' . $feedbackRow["date"] . '</p>' .
+              '</div>' .
+              '</div>' .
+              '<p class="ml-1 mr-1">' . $feedbackRow['feedback'] . '</p>' .
+              '</div>';
+            // End PHP code
+          
+          }
+          ?>
+
+        </div>
+      </div>
     </div>
-    <hr>
+  </div>
+  <hr>
   </div>
 
   <!-- this section is for check customer reviews and it will be always appear. -->
@@ -321,82 +321,82 @@ session_start();
   <!-- this is the rating section  -->
 
   <?php // rating option will only be give to users that have placed the order and not given the review earlier
- 
+  
   if (canWriteReview()) {
-    
-?>
-  <div class="container-fluid">
 
-    <div class="d-flex container justify-content-around">
-      <div class="imgs mb-5" style="align-items: left;">
-        <p class="mt-5 mb-3" style="text-align:center; font-size:2rem; font-weight:700">How was your Product Experience?
-        </p>
-        <img src="../imgs/reviewme.png" alt="" style="width:300px;margin-left:6rem">
+    ?>
+    <div class="container-fluid">
+
+      <div class="d-flex container justify-content-around">
+        <div class="imgs mb-5" style="align-items: left;">
+          <p class="mt-5 mb-3" style="text-align:center; font-size:2rem; font-weight:700">How was your Product Experience?
+          </p>
+          <img src="../imgs/reviewme.png" alt="" style="width:300px;margin-left:6rem">
+        </div>
+        <div class="stars">
+
+
+          <form action="" id="reviewform" class="mt-5" method="post">
+
+            <div class="mystars mr-5" id="star">
+              <span class=" reviewstars fa fa-star " id="1"></span>
+              <span class=" reviewstars fa fa-star " id="2"></span>
+              <span class=" reviewstars fa fa-star " id="3"></span>
+              <span class=" reviewstars fa fa-star" id="4"></span>
+              <span class=" reviewstars fa fa-star" id="5"></span>
+              <input type="hidden" value="0" name="stars">
+            </div>
+            <div class="review row">
+              <input type="textarea" class="form-control mt-5" style="min-width:100%;height:10rem; margin:auto"
+                name="review" placeholder="share Feedback...">
+
+            </div>
+            <button class="submit btn btn-primary mt-3" id="submitbtn">Submit Review</button>
+          </form>
+        </div>
       </div>
-      <div class="stars">
+      <hr>
 
+      <!-- this is the rating section  -->
+    <?php } ?>
 
-        <form action="" id="reviewform" class="mt-5" method="post">
+    <hr>
+    <div class=" deals container-fluid mt-5">
+      <p style="font-size:1.5rem;font-weight: 600;">Special Deals</p>
+      <div class="row d-flex justify-content-around align-items-around">
+        <?php
 
-          <div class="mystars mr-5" id="star">
-            <span class=" reviewstars fa fa-star " id="1"></span>
-            <span class=" reviewstars fa fa-star " id="2"></span>
-            <span class=" reviewstars fa fa-star " id="3"></span>
-            <span class=" reviewstars fa fa-star" id="4"></span>
-            <span class=" reviewstars fa fa-star" id="5"></span>
-            <input type="hidden" value="0" name="stars">
-          </div>
-          <div class="review row">
-            <input type="textarea" class="form-control mt-5" style="min-width:100%;height:10rem; margin:auto" name="review"
-              placeholder="share Feedback...">
+        $result = $conn->query("Select * from products where pet_category=$category limit 4");
+        while ($row = $result->fetch_assoc()) {
 
-          </div>
-          <button class="submit btn btn-primary mt-3" id="submitbtn">Submit Review</button>
-        </form>
-      </div>
-  </div>
-<hr>
- 
-<!-- this is the rating section  -->
-<?php } ?>
+          ?>
+          <a href="product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
+            <div class="card" style="width: 20rem;  max-height: 100%;">
+              <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;"
+                src="<?php echo getImageName($row['product_images']); ?>" alt="product images">
 
-  <hr>
-  <div class=" deals container-fluid mt-5">
-    <p style="font-size:1.5rem;font-weight: 600;">Special Deals</p>
-    <div class="row d-flex justify-content-around align-items-around">
-      <?php
-
-      $result = $conn->query("Select * from products where pet_category=$category limit 4");
-      while ($row = $result->fetch_assoc()) {
-
-        ?>
-        <a href="product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
-          <div class="card" style="width: 20rem;  max-height: 100%;">
-            <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;"
-              src="<?php echo getImageName($row['product_images']); ?>" alt="product images">
-
-            <div class="card-body" style="position:relative;">
-              <h3>For
-                <?php echo getPetCategory($row['pet_category']); ?>
-              </h3>
-              </span> </p>
-              <p class="card-text "> <span>
-                  <?php echo $row['product_name']; ?>
+              <div class="card-body" style="position:relative;">
+                <h3>For
+                  <?php echo getPetCategory($row['pet_category']); ?>
+                </h3>
                 </span> </p>
-              <div class="d-flex " style="text-align: center; justify-content:left; >
+                <p class="card-text "> <span>
+                    <?php echo $row['product_name']; ?>
+                  </span> </p>
+                <div class="d-flex " style="text-align: center; justify-content:left; >
               <p class=" card-text "> <span style=" font-size: 20px; font-weight: 600;">
-                <?php echo "Rs." . getDiscountedPrice($row['product_price'], 10); ?></span> <span class="ml-2"
-                  style="text-decoration: line-through; font-size: 15px;">
-                  <?php echo "RS." . $row['product_price']; ?>
-                </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
+                  <?php echo "Rs." . getDiscountedPrice($row['product_price'], 10); ?></span> <span class="ml-2"
+                    style="text-decoration: line-through; font-size: 15px;">
+                    <?php echo "RS." . $row['product_price']; ?>
+                  </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      <?php } ?>
+          </a>
+        <?php } ?>
+      </div>
     </div>
-  </div>
-  <hr>
+    <hr>
 
 
 
@@ -404,110 +404,111 @@ session_start();
 
 
 
-  <?php require_once "../components/footer.php"; 
-  
-  function canWriteReview(){
-    include "../scripts/db_connect.php";
+    <?php require_once "../components/footer.php";
 
-    if(!isset($_SESSION['user_id'])) return false; 
-    $productID = $_GET['productID'];
-
-    $isOrdered = mysqli_query($conn,"select user_id from orders where product_id=$productID and user_id=$_SESSION[user_id];");
-    $isOrdered = mysqli_fetch_array($isOrdered);
-    $isReviewed = $conn->query("select user_id from reviews where product_id=$productID and user_id=$_SESSION[user_id];");
-    $isReviewed = mysqli_fetch_array($isReviewed);
-  
-   
-
-    if($isOrdered != null)
+    function canWriteReview()
     {
-      if($isOrdered != null)// checking if the current user has ordered the product
-      {
-          if($isReviewed == null) return true; 
-          else return false;
+      include "../scripts/db_connect.php";
+
+      if (!isset($_SESSION['user_id']))
+        return false;
+      $productID = $_GET['productID'];
+
+      $isOrdered = mysqli_query($conn, "select user_id from orders where product_id=$productID and user_id=$_SESSION[user_id];");
+      $isOrdered = mysqli_fetch_array($isOrdered);
+      $isReviewed = $conn->query("select user_id from reviews where product_id=$productID and user_id=$_SESSION[user_id];");
+      $isReviewed = mysqli_fetch_array($isReviewed);
+
+
+
+      if ($isOrdered != null) {
+        if ($isOrdered != null)// checking if the current user has ordered the product
+        {
+          if ($isReviewed == null)
+            return true;
+          else
+            return false;
+        }
+
+      } else
+        return false;
+    }
+    ?>
+    <!-- /this is model -->
+    <?php require_once "../components/modal.php" ?>
+    <!-- /this is model -->
+
+    <script>
+      const stars = document.querySelectorAll('.fa');
+      let newItem, len, yellowStar, initialstar, len2;
+      const startIndex = 10;
+      let count = 0;
+      const endIndex = 15;
+      let starArray = new Array();
+      for (let i = startIndex; i < endIndex; i++) {
+
+        starArray.push(stars[i])
+
       }
-      
-    }
+      // console.log(starArray)
 
-    else return false;
-  }
-?>
+      starArray.forEach(eachStar => {
+        eachStar.addEventListener('click', function () {
+          newItem = this.id;
+          count++;
+          console.log("iamcount", count);
 
 
-  <script>
-    const stars = document.querySelectorAll('.fa');
-    let newItem, len, yellowStar,initialstar,len2;
-    const startIndex = 10;
-    let count=0;
-    const endIndex = 15;
-    let starArray = new Array();
-    for (let i = startIndex; i < endIndex; i++) {
+          len = parseInt(newItem);
+          len2 = len;
 
-      starArray.push(stars[i])
+          console.log("newitem", newItem)
 
-    }
-    // console.log(starArray)
+          colorme();
 
-    starArray.forEach(eachStar => {
-      eachStar.addEventListener('click', function () {
-        newItem = this.id;
-        count++;
-        console.log("iamcount",count);
 
-         
-        len = parseInt(newItem);
-         len2=len;
-
-        console.log("newitem",newItem)
-
-        colorme();
-
+        })
 
       })
 
-    })
+      colorme = () => {
+        while (len > 0) {
+          initialstar = len;
+          yellowStar = document.getElementById(len);
+          yellowStar.classList.add('checked')
+          len--;
 
-    colorme = () => {
-      while (len > 0) {
-        initialstar=len;
-        yellowStar = document.getElementById(len);
-        yellowStar.classList.add('checked')  
-        len--;
-
-      }
-      removeme()
-    
-
-    }
-    
- 
- 
-    removeme=()=>{
-  
-      if(count %2!=0){
-      
-      while(len2>0){
-        
-        console.log("len2",len2);
-        let star=document.getElementById(len2);
-        console.log(star);
-        len2--;
-        if(star.classList.contains('checked')){
-
-           star.classList.toggle('checked')
         }
+        removeme()
+
+
       }
-    }
-
-      
-      
-
-       
-      
-    }
 
 
 
+      removeme = () => {
+
+        if (count % 2 != 0) {
+
+          while (len2 > 0) {
+
+            console.log("len2", len2);
+            let star = document.getElementById(len2);
+            console.log(star);
+            len2--;
+            if (star.classList.contains('checked')) {
+
+              star.classList.toggle('checked')
+            }
+          }
+        }
+
+
+
+
+
+
+      }
 
 
 
@@ -517,7 +518,10 @@ session_start();
 
 
 
-  </script>
+
+
+
+    </script>
 </body>
 
-</html> 
+</html>
