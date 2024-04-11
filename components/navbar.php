@@ -35,12 +35,14 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light ">
-        <a class="navbar-brand" href="../index.php"><span style="font-size: larger; font-weight: 900;">🐶Happy
+        <a class="navbar-brand" href="<?php $var = (strpos($_SERVER["REQUEST_URI"], "index.php")!=true) ? '../index.php':'#'; echo $var; ?>"><span style="font-size: larger; font-weight: 900;">🐶Happy
                 Biengs😸</span></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <?php if(!strpos($_SERVER["REQUEST_URI"], "admin_login.php")) 
+        {?>
         <div class="collapse navbar-collapse ml-5 " id="navbarNav">
             <ul class="navbar-nav" style="font-size: 1.2rem; font-weight: 600;">
                 <li class="nav-item mr-4">
@@ -101,7 +103,7 @@
 
         </ul>
 
-
+<?php } ?>
 
 
     </nav>

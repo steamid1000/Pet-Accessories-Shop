@@ -1,4 +1,7 @@
 <?php
+
+
+
 session_start();
 
 ?>
@@ -34,13 +37,11 @@ session_start();
 
     overflow: hidden;
   }
-
-  form ::placeholder {
-
-    font-size: 20px;
-
-    left: ;
-    margin-left: 150px;
+ 
+ form ::placeholder{
+   
+  font-size: 20px;
+  margin-left: 150px;
 
   }
 
@@ -137,8 +138,7 @@ session_start();
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-
-  <title>PRoduct !</title>
+  <title>Product Page</title>
 </head>
 
 <body>
@@ -156,7 +156,7 @@ session_start();
   $category = $result['pet_category']; // this is so that we can load similar products below
   
 
-
+ 
 
   ?>
 
@@ -219,18 +219,11 @@ session_start();
     <div class="navcontainer d-flex justify-content-between">
       <div class="logoimg">
         <img src="../imgs/shopicon.png" alt="" style="width: 50px" />
-      </div>
-      <div class="login">
-        <button type="button " class="btn btn-light mr-3">
-          <a class="text-decoration-none" href="#">login</a>
-        </button>
-        <button type="button" class="btn btn-dark rounded-top rounded-bottom">
-          <a class="text-decoration-none" href="#">Signup</a>
-        </button>
+        <span><b>Reviews</b></span>
       </div>
     </div>
     <hr />
-    <div class="reviewme d-flex">
+    <div class="reviewme d-flex" style="overflow-y:hidden;">
       <div class="row">
 
         <div class="col-sm stars  text-center">
@@ -239,6 +232,7 @@ session_start();
           <span class="fa fa-star"></span>
           <span class="fa fa-star"></span>
           <span class="fa fa-star"></span>
+        </div>
           <div class="starline">
             <div style="font-size: 15px;" class="row d-flex flex-row mt-4">
               <div class="name d-flex">
@@ -292,18 +286,10 @@ session_start();
 
         <div class="col-sm reviews " id="rightdiv" style="max-height: 28.1215rem;">
           <div class="scrollme" style="width: 100%;; height: 100%; overflow-Y: scroll; overflow-x: hidden;">
-
-
-
-
-
             <?php
 
-            $cardResult = $conn->query('select * from feedbacks');
+            $cardResult = $conn->query("select * from feedbacks");
             while ($feedbackRow = $cardResult->fetch_assoc()) {
-              // echo $feedbackRow ['feedback'].'<br>';
-              // echo $feedbackRow ['date'].'<br>';
-              // echo $feedbackRow ['feedback_email'];
             
               // Start PHP code
               echo '<div class="card mt-4 mb-4" style="text-align: center; border:1px solid grey;min-width:600px; margin-left:6rem">' .
@@ -334,6 +320,11 @@ session_start();
 
   <!-- this is the rating section  -->
 
+  <?php // rating option will only be give to users that have placed the order and not given the review earlier
+ 
+  if (canWriteReview()) {
+    
+?>
   <div class="container-fluid">
 
     <div class="d-flex container justify-content-around">
@@ -353,34 +344,21 @@ session_start();
             <span class=" reviewstars fa fa-star " id="3"></span>
             <span class=" reviewstars fa fa-star" id="4"></span>
             <span class=" reviewstars fa fa-star" id="5"></span>
-            <input type="hidden" value="0">
+            <input type="hidden" value="0" name="stars">
           </div>
           <div class="review row">
-            <input type="textarea" class="form-control mt-5 " style="width:80%;height:10rem; margin:auto" name="review"
+            <input type="textarea" class="form-control mt-5" style="min-width:100%;height:10rem; margin:auto" name="review"
               placeholder="share Feedback...">
 
           </div>
-          <button class="submit" id="submitbtn">Submit Review</button>
+          <button class="submit btn btn-primary mt-3" id="submitbtn">Submit Review</button>
         </form>
       </div>
-
-
-
-    </div>
-
   </div>
-
-
-
-
-
-
-
-
-
-
-
-
+<hr>
+ 
+<!-- this is the rating section  -->
+<?php } ?>
 
   <hr>
   <div class=" deals container-fluid mt-5">
@@ -426,7 +404,34 @@ session_start();
 
 
 
-  <?php require_once "../components/footer.php"; ?>
+  <?php require_once "../components/footer.php"; 
+  
+  function canWriteReview(){
+    include "../scripts/db_connect.php";
+
+    if(!isset($_SESSION['user_id'])) return false; 
+    $productID = $_GET['productID'];
+
+    $isOrdered = mysqli_query($conn,"select user_id from orders where product_id=$productID and user_id=$_SESSION[user_id];");
+    $isOrdered = mysqli_fetch_array($isOrdered);
+    $isReviewed = $conn->query("select user_id from reviews where product_id=$productID and user_id=$_SESSION[user_id];");
+    $isReviewed = mysqli_fetch_array($isReviewed);
+  
+   
+
+    if($isOrdered != null)
+    {
+      if($isOrdered != null)// checking if the current user has ordered the product
+      {
+          if($isReviewed == null) return true; 
+          else return false;
+      }
+      
+    }
+
+    else return false;
+  }
+?>
 
 
   <script>
