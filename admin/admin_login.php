@@ -10,7 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result!= null and count($result) > 0) {
         $_SESSION['admin_id'] = $result[0];
         echo 'Admin has logged in';
-        // header('Location:../dashboard.php',true);
+        header('Location: admin.php',true);
     }
     else {
         echo "failed";

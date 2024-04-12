@@ -380,14 +380,7 @@ session_start();
                   <?php echo getPetCategory($row['pet_category']); ?>
                 </h3>
                 </span> </p>
-<<<<<<< HEAD
               <div class="d-flex " style="text-align: center; justify-content:left;" >
-=======
-                <p class="card-text "> <span>
-                    <?php echo $row['product_name']; ?>
-                  </span> </p>
-                <div class="d-flex " style="text-align: center; justify-content:left; >
->>>>>>> 4513be5223fecbd55d0716f910505c592c044625
               <p class=" card-text "> <span style=" font-size: 20px; font-weight: 600;">
                   <?php echo "Rs." . getDiscountedPrice($row['product_price'], 10); ?></span> <span class="ml-2"
                     style="text-decoration: line-through; font-size: 15px;">
