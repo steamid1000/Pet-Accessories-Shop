@@ -138,7 +138,7 @@ session_start();
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Product Page</title>
+  <title>🐶😸Product Page</title>
 </head>
 
 <body>
@@ -383,7 +383,7 @@ session_start();
               <p class="card-text "> <span>
                   <?php echo $row['product_name']; ?>
                 </span> </p>
-              <div class="d-flex " style="text-align: center; justify-content:left; >
+              <div class="d-flex " style="text-align: center; justify-content:left;" >
               <p class=" card-text "> <span style=" font-size: 20px; font-weight: 600;">
                 <?php echo "Rs." . getDiscountedPrice($row['product_price'], 10); ?></span> <span class="ml-2"
                   style="text-decoration: line-through; font-size: 15px;">
