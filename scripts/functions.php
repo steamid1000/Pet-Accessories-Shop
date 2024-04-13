@@ -66,6 +66,15 @@ function getImageName($current_name){
       } 
 }
 
+//function to convert the image to base64
+function convertToBase64($imagePath,$imageName){
+    $path = $imagePath;
+    $type = substr($imageName,strpos($imageName,'.',)+1,strlen($imageName));    
+    $data = file_get_contents($path);
+    $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+    return $base64;
+}
+
 // a trial version of the user class
 class user{ // we can store the user data instead of fetching the details every time we need from the database
     private $user_name;

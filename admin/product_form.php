@@ -97,7 +97,7 @@ function edit($index){
 <body>
   <div class="container">
     <h1 style="text-align: center;color:black;">Product Details</h1>
-    <form action="" method="post" enctype="multipart/form-data">
+  <form action="testupload.php?ProductID=<?php echo $_GET['ProductID'];?>&update=<?php echo (isset($_GET['ProductID'])) ? "true" : "false" ;?>" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label for="title"> Product Name:</label>
         <input type="text" id="title" name="product_name" required value="<?php echo edit(1);?>">
@@ -113,20 +113,20 @@ function edit($index){
      
       <div class="form-group">
         <label for="thumbnail">Product Image:</label>
-        <input type="file" <?php echo (!isset($_GET['ProductID'])) ? 'required' : ' ' ;  ?> id="thumbnail" name="thumbnail">
+        <input type="file" <?php echo (!isset($_GET['ProductID'])) ? 'required' : ' ' ;  ?> id="thumbnail" name="image1">
       </div>
       <div class="form-group">
         <label for="thumbnail">Product Image2:</label>
-        <input type="file" <?php echo (!isset($_GET['ProductID'])) ? 'required': '' ;  ?>  id="thumbnail" name="thumbnail">
+        <input type="file" <?php echo (!isset($_GET['ProductID'])) ? 'required': '' ;  ?>  id="thumbnail" name="image2">
       </div>
 
       <div class="form-group">
         <label for="start_date">Product Category:</label>
-        <input type="text" id="start_date" name="product_category" required value="<?php echo getProductCategory(edit(6));?>">
+        <input type="text" id="start_date" name="product_category" required value="<?php if(isset($_GET['ProductID'])) echo edit(6);?>">
       </div>
       <div class="form-group">
         <label for="end_date">Pet Category</label>
-        <input type="text" id="end_date" name="pet_category" required value="<?php echo getPetCategory(edit(7));?>">
+        <input type="text" id="end_date" name="pet_category" required value="<?php if(isset($_GET['ProductID'])) echo edit(7);?>">
       </div>
       
       <div class="form-group">

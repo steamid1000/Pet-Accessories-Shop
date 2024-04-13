@@ -9,11 +9,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_fetch_array($result);
     if ($result!= null and count($result) > 0) {
         $_SESSION['admin_id'] = $result[0];
-        echo 'Admin has logged in';
+        
         header('Location: admin.php',true);
     }
     else {
-        echo "failed";
+        echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+          <span aria-hidden='true'>&times;</span>
+        </button>
+        <strong>Admin Login Failed</strong> 
+      </div>
+      
+      <script>
+        $('.alert').alert();
+      </script>";
         
     }
 }
@@ -21,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

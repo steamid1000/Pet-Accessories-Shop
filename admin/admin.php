@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once '../scripts/db_connect.php';
 
 $total_users = $conn->query("SELECT user_id FROM users");
@@ -11,11 +11,11 @@ $total_orders = mysqli_num_rows($total_orders);
 $total_feed = $conn->query("SELECT feedback_id FROM feedbacks");
 $total_feed = mysqli_num_rows($total_feed);
 
-session_start();
+
 
 if (!isset($_SESSION['admin_id'])) {
     session_destroy();
-    header('Location: ../admin_login.php', true);
+    header('Location: admin_login.php', true);
     // exit;
 }
 

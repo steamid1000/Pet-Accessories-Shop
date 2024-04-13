@@ -1,46 +1,60 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    require_once '../db_scripts/login.php';
+    require_once '../scripts/db_connect.php';
+    require_once '../scripts/functions.php';
 
     //General details of the movie form
-    $title = $_POST['title'];
+    $title = $_POST['product_name'];
     $description = $_POST['description'];
-    $start_date = $_POST['start_date'];
-    $end_date = $_POST['end_date'];
-    $price = $_POST['Ticket_price'];
+    $product_price = $_POST['product_price'];
+    $product_category = $_POST['product_category'];
+    $pet_category = $_POST['pet_category'];
 
+    $product_id = (isset($_GET['ProductID'])) ? $_GET['ProductID'] : -1;
 
-        //Adding in the movies table
-        $movieQuery = "INSERT INTO `movies`(`movie_name`, `status`, `start_date`, `end_date`) VALUES('$title','Active','$start_date','$end_date')";
-        mysqli_query($conn, $movieQuery);
-    
+    //lets take the image here only
+     $image1Given = false;
+     $image2Given = false;
 
-    //Getting the movie id to fill rest of the information
-    $movieIdQuery = "SELECT `movie_id` from `movies` where movie_name='$title'";
-    $movieIdfetched = $conn->query($movieIdQuery);
-    $movieID = mysqli_fetch_array($movieIdfetched);
-    $finalMovieID = $movieID[0];
-
-    if (isset($_FILES['thumbnail'])) {
-        //Uploading thumbnail and back-image
-        $filename = $_FILES["thumbnail"]["name"];
-        $tempname = $_FILES["thumbnail"]["tmp_name"];
-        $folder = "../image/" . $filename;
-
-        //Move and rename the image file
-        if (move_uploaded_file($tempname, $folder)) {
-            //renaming the files
-            $exten = substr($filename, stripos($filename, '.'));
-            $movieThumb = $title . 'thumb' . $exten;
-            rename($folder, '../MovieImages/' . $movieThumb);
+     if ( is_uploaded_file($_FILES['image1']['tmp_name']) == true) {
+        $image1Given = true;
+        if ( is_uploaded_file($_FILES['image2']['tmp_name']) == true) {
+            $image2Given = true;
         }
-            $movieInfoQuery = "INSERT INTO `movie_info`() VALUES('$finalMovieID','$movieThumb','$description','$price')";
-            mysqli_query($conn, $movieInfoQuery);
-        
-        header('admin.php', true);
+     }
+
+
+     echo $image1Given;
+
+     
+     $image1 = ($image1Given) ? convertToBase64($_FILES['image1']['tmp_name'],$_FILES['image1']['name']) : "null"; 
+     $image2 = ($image2Given) ? convertToBase64($_FILES['image2']['tmp_name'],$_FILES['image2']['name']) : "null"; 
+
+
+    if ((isset($_GET['update']) and $_GET['update'] == "true") and $image1Given == false) {
+        $stmt = $conn->prepare("UPDATE `products` SET `product_name`=?,`product_description`=?,`product_price`=?,`product_category`=?,`pet_category`=? WHERE product_id=?");
+        $stmt->bind_param("ssssss",$title,$description,$product_price,$product_category,$pet_category,$product_id);
+        $stmt->execute();
+    }
+    elseif ((isset($_GET['update']) and $_GET['update'] == "true") and $image1Given == true) {
+        $stmt = $conn->prepare("UPDATE `products` SET `product_name`=?,`product_description`=?,`product_price`=?, `product_images`=?, `product_images2`=?,`product_category`=?,`pet_category`=? WHERE product_id=?");
+        $stmt->bind_param("ssssssss",$title,$description,$product_price,$image1,$image2,$product_category,$pet_category, $product_id);
+        $stmt->execute();
+    }
+
+    else {
+        //Adding in the prdoduct table
+        $stmt = $conn->prepare("INSERT INTO `products`(`product_name`, `product_description`, `product_price`, `product_images`, `product_images2`, `product_category`, `pet_category`) VALUES (?,?,?,?,?,?,?)");
+        $stmt->bind_param("ssssssss",$title,$description,$product_price,$iamge1,$image2,$product_category,$pet_category);
+        $stmt->execute();
+    
+    }
+
+  
+       header("Location: products.php",true);
     } else {
-        header('admin.php', true);
+        header('Location: admin.php', true);
     }
 
 
-}
+?>
