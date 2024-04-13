@@ -17,7 +17,7 @@ require_once '../scripts/functions.php';
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
 
-  <title>Cats</title>
+  <title><?php echo getPetCategory($_GET['pet_category']); ?></title>
 </head>
 
 <body>
@@ -61,11 +61,11 @@ require_once '../scripts/functions.php';
     <div class="row d-flex justify-content-around align-items-around">
       <?php
 
-      $result = $conn->query("Select * from products where pet_category=1 limit 12");
+      $result = $conn->query(getActiveQuery($_GET['pet_category']));
       while ($row = $result->fetch_assoc()) {
 
         ?>
-        <a href="pages/product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
+        <a href="pages/product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none; color:black;">
           <div class="card" style="width: 20rem;  max-height: 95%;">
             <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;"
               src="<?php echo getImageName($row['product_images']); ?>" alt="product images">
@@ -74,7 +74,7 @@ require_once '../scripts/functions.php';
               <h3>For <?php echo getPetCategory($row['pet_category']); ?></h3>
               </span> </p>
               <p class="card-text "> <span><?php echo $row['product_name']; ?></span> </p>
-              <div class="d-flex " style="text-align: center; justify-content:left; >
+              <div class="d-flex " style="text-align: center; justify-content:left;">
               <p class=" card-text "> <span style=" font-size: 20px; font-weight: 600;">
                 <?php echo "Rs." . getDiscountedPrice($row['product_price'], 10); ?></span> <span class="ml-2"
                   style="text-decoration: line-through; font-size: 15px;"> <?php echo "RS." . $row['product_price']; ?>
