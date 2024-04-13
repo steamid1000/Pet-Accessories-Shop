@@ -192,12 +192,14 @@ session_start();
           </form>
         </div>
         <hr>
-        <button type="submit" class="btn btn-primary mt-4 ml-0" data-toggle="modal" data-target="#exampleModal"
+        <?php if(isset($_SESSION['user_id'])){ ?> <button type="submit" class="btn btn-primary mt-4 ml-0" data-toggle="modal" data-target="#exampleModal"
           style="width: 252px; background-color:orange; border-radius:5px;height:45px"> <span> Buy Now</span> <span
             class="ml-4"> <img width="30" height="30" src="https://img.icons8.com/pastel-glyph/64/cat--v3.png"
               alt="cat--v3" /></span> </button>
-
-
+          <?php } else{ ?>
+            <h5 style="color: red;">Please Login to buy product!</h5>
+            <hr>
+            <?php } ?>
         <div class="description mt-3"></div>
         <p> <span style="font-weight:bold"> Product Details </span> <span><img width="24" height="24"
               src="https://img.icons8.com/material-sharp/24/note.png" alt="note" /></span> </p>

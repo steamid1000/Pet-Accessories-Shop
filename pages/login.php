@@ -5,16 +5,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usr = $_POST['user_email'];
     $pass = $_POST['user_pass'];
 
-    echo $usr;
-    echo $pass . "<br>";
     $result = $conn->query("select `user_id` from `users` where user_email='$usr' and user_password='$pass'");
-    if ($result != false) {
-        $result = mysqli_fetch_array($result);
+    $result = mysqli_fetch_array($result);
+    if ($result!= null and count($result) > 0) {
         $_SESSION['user_id'] = $result[0];
         header('Location:../index.php',true);
     }
     else {
-        echo "failed";
+        echo "<div class='mb-0 alert alert-danger alert-dismissible fade show' role='alert'>
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+        <span aria-hidden='true'>&times;</span>
+        </button>
+        <strong>Login Failed, Check the creds!!</strong> 
+        </div>
+        
+        <script>
+        $('.alert').alert();
+        </script>";
         
     }
 }

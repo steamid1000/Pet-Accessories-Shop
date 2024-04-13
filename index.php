@@ -17,12 +17,8 @@ require_once 'scripts/functions.php';
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="index.css">
-<<<<<<< HEAD
 
   <title>🐶😸Pet Accessories!!</title>
-=======
-  <title> Pet Accessories </title>
->>>>>>> 4513be5223fecbd55d0716f910505c592c044625
   <style>
     .card:hover {
       box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -135,7 +131,7 @@ require_once 'scripts/functions.php';
       $result = $conn->query("Select * from products where pet_category=1 limit 4");
       while ($row = $result->fetch_assoc()) {
         ?>
-        <a href="#" style="text-decoration: none;">
+        <a href="pages/product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
           <div class="card" style="width: 20rem;  max-height: 95%;">
             <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;"
               src="<?php echo getImageName($row['product_images']); ?>" alt="Card image cap">
@@ -174,7 +170,7 @@ require_once 'scripts/functions.php';
       $result = $conn->query("Select * from products limit 4");
       while ($row = $result->fetch_assoc()) {
         ?>
-        <a href="#" style="text-decoration: none;">
+        <a href="pages/product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
           <div class="card" style="width: 20rem;  max-height: 95%;">
             <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;"
               src="<?php echo getImageName($row['product_images']); ?>" alt="Card image cap">
