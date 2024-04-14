@@ -154,7 +154,7 @@ session_start();
   $result = mysqli_fetch_assoc($result);
 
   $category = $result['pet_category']; // this is so that we can load similar products below
-  
+
 
 
 
@@ -165,10 +165,8 @@ session_start();
     <div class="row col-12">
       <div class=" col-md-8">
         <div class="row">
-          <img src="<?php echo getImageName($result['product_images']); ?>" class="col-md-6"
-            style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
-          <img src="<?php echo getImageName($result['product_images2']); ?>" class="col-md-6"
-            style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
+          <img src="<?php echo getImageName($result['product_images']); ?>" class="col-md-6" style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
+          <img src="<?php echo getImageName($result['product_images2']); ?>" class="col-md-6" style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
         </div>
       </div>
 
@@ -187,22 +185,17 @@ session_start();
         <p style="color: green;">Inclusive of all taxes</p>
         <div class="forms">
           <form action="">
-            <input type="number" name="qt" class="form-control" id="quantity" name="quantity" min="1"
-              style="max-width: 200px;">
+            <input type="number" name="qt" class="form-control" id="quantity" name="quantity" min="1" style="max-width: 200px;">
           </form>
         </div>
         <hr>
-        <?php if(isset($_SESSION['user_id'])){ ?> <button type="submit" class="btn btn-primary mt-4 ml-0" data-toggle="modal" data-target="#exampleModal"
-          style="width: 252px; background-color:orange; border-radius:5px;height:45px"> <span> Buy Now</span> <span
-            class="ml-4"> <img width="30" height="30" src="https://img.icons8.com/pastel-glyph/64/cat--v3.png"
-              alt="cat--v3" /></span> </button>
-          <?php } else{ ?>
-            <h5 style="color: red;">Please Login to buy product!</h5>
-            <hr>
-            <?php } ?>
+        <?php if (isset($_SESSION['user_id'])) { ?> <button type="submit" class="btn btn-primary mt-4 ml-0" data-toggle="modal" data-target="#exampleModal" style="width: 252px; background-color:orange; border-radius:5px;height:45px"> <span> Buy Now</span> <span class="ml-4"> <img width="30" height="30" src="https://img.icons8.com/pastel-glyph/64/cat--v3.png" alt="cat--v3" /></span> </button>
+        <?php } else { ?>
+          <h5 style="color: red;">Please Login to buy product!</h5>
+          <hr>
+        <?php } ?>
         <div class="description mt-3"></div>
-        <p> <span style="font-weight:bold"> Product Details </span> <span><img width="24" height="24"
-              src="https://img.icons8.com/material-sharp/24/note.png" alt="note" /></span> </p>
+        <p> <span style="font-weight:bold"> Product Details </span> <span><img width="24" height="24" src="https://img.icons8.com/material-sharp/24/note.png" alt="note" /></span> </p>
         <p>
           <?php echo $result['product_description']; ?>
         </p>
@@ -290,7 +283,7 @@ session_start();
         <div class="scrollme" style="width: 100%;; height: 100%; overflow-Y: scroll; overflow-x: hidden;">
           <?php
 
-          $cardResult = $conn->query("select * from feedbacks");
+          $cardResult = $conn->query("SELECT reviews.review_stars,users.user_name,reviews.review_description,reviews.review_date FROM reviews INNER JOIN users ON reviews.user_id  = users.user_id and reviews.product_id=$productID;");
           while ($feedbackRow = $cardResult->fetch_assoc()) {
 
             // Start PHP code
@@ -298,16 +291,16 @@ session_start();
               '<div class="row d-flex justify-content-between mb-3 mt-2">' .
               '<div class="img d-flex align-items-center">' .
               '<img style="width: 2.5rem; margin-left: 1.3rem;" src="../imgs/back.png" alt="">' .
-              '<p style="margin-left: 1rem; text-transform: capitalize; font-style: italic;">' . $feedbackRow['feedback_email'] . '</p>' .
+              '<p style="margin-left: 1rem; text-transform: capitalize; font-style: italic;">' . $feedbackRow['user_name'] . '</p>' .
               '</div>' .
               '<div class="date" style="margin-right: 1.9rem;">' .
-              '<p>' . $feedbackRow["date"] . '</p>' .
+              '<p>' . $feedbackRow["review_date"] . '</p>' .
               '</div>' .
               '</div>' .
-              '<p class="ml-1 mr-1">' . $feedbackRow['feedback'] . '</p>' .
+              '<p class="ml-1 mr-1">' . $feedbackRow['review_description'] . '</p>' .
               '</div>';
             // End PHP code
-          
+
           }
           ?>
 
@@ -323,10 +316,10 @@ session_start();
   <!-- this is the rating section  -->
 
   <?php // rating option will only be give to users that have placed the order and not given the review earlier
-  
+
   if (canWriteReview()) {
 
-    ?>
+  ?>
     <div class="container-fluid">
 
       <div class="d-flex container justify-content-around">
@@ -349,8 +342,7 @@ session_start();
               <input type="hidden" value="0" name="stars">
             </div>
             <div class="review row">
-              <input type="textarea" class="form-control mt-5" style="min-width:100%;height:10rem; margin:auto"
-                name="review" placeholder="share Feedback...">
+              <input type="textarea" class="form-control mt-5" style="min-width:100%;height:10rem; margin:auto" name="review" placeholder="share Feedback...">
 
             </div>
             <button class="submit btn btn-primary mt-3" id="submitbtn">Submit Review</button>
@@ -371,23 +363,21 @@ session_start();
         $result = $conn->query("Select * from products where pet_category=$category limit 4");
         while ($row = $result->fetch_assoc()) {
 
-          ?>
+        ?>
           <a href="product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
             <div class="card" style="width: 20rem;  max-height: 100%;">
-              <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;"
-                src="<?php echo getImageName($row['product_images']); ?>" alt="product images">
+              <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;" src="<?php echo getImageName($row['product_images']); ?>" alt="product images">
 
               <div class="card-body" style="position:relative;">
                 <h3>For
                   <?php echo getPetCategory($row['pet_category']); ?>
                 </h3>
                 </span> </p>
-              <div class="d-flex " style="text-align: center; justify-content:left;" >
-              <p class=" card-text "> <span style=" font-size: 20px; font-weight: 600;">
-                  <?php echo "Rs." . getDiscountedPrice($row['product_price'], 10); ?></span> <span class="ml-2"
-                    style="text-decoration: line-through; font-size: 15px;">
-                    <?php echo "RS." . $row['product_price']; ?>
-                  </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
+                <div class="d-flex " style="text-align: center; justify-content:left;">
+                  <p class=" card-text "> <span style=" font-size: 20px; font-weight: 600;">
+                      <?php echo "Rs." . getDiscountedPrice($row['product_price'], 10); ?></span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;">
+                      <?php echo "RS." . $row['product_price']; ?>
+                    </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
                 </div>
               </div>
             </div>
@@ -421,14 +411,13 @@ session_start();
 
 
       if ($isOrdered != null) {
-        if ($isOrdered != null)// checking if the current user has ordered the product
+        if ($isOrdered != null) // checking if the current user has ordered the product
         {
           if ($isReviewed == null)
             return true;
           else
             return false;
         }
-
       } else
         return false;
     }
@@ -452,7 +441,7 @@ session_start();
       // console.log(starArray)
 
       starArray.forEach(eachStar => {
-        eachStar.addEventListener('click', function () {
+        eachStar.addEventListener('click', function() {
           newItem = this.id;
           count++;
           console.log("iamcount", count);
@@ -508,18 +497,6 @@ session_start();
 
 
       }
-
-
-
-
-
-
-
-
-
-
-
-
     </script>
 </body>
 

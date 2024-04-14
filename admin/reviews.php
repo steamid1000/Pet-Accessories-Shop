@@ -37,9 +37,9 @@ include_once "../scripts/functions.php";
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
-      <?php require_once "admin_components/admin_navbar.php" ?>
-      <?php require_once "admin_components/admin_sidebar.php" ?>
-     
+        <?php require_once "admin_components/admin_navbar.php" ?>
+        <?php require_once "admin_components/admin_sidebar.php" ?>
+
         <div class="page-wrapper">
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
@@ -84,48 +84,47 @@ include_once "../scripts/functions.php";
                                 <table class="table no-wrap">
                                     <thead>
                                         <tr>
-                                        <?php
-                                        $headings = mysqli_query($conn, "Select * from reviews");
-                                        if ($headings != null) {
-                                        $res = mysqli_fetch_assoc($headings);
-                                        $res = array_keys($res);
-                                            for ($i=0; $i < sizeof($res)-1; $i++) {  
-                                        ?>
-                                            <th class="border-top-0"><?php echo str_replace('_',' ',$res[$i]); ?></th>
-                                            
-                                            <?php } ?>
+                                            <?php
+                                            $headings = mysqli_query($conn, "Select * from reviews");
+                                            if ($headings != null) {
+                                                $res = mysqli_fetch_assoc($headings);
+                                                $res = array_keys($res);
+                                                for ($i = 0; $i < sizeof($res) - 1; $i++) {
+                                            ?>
+                                                    <th class="border-top-0"><?php echo str_replace('_', ' ', $res[$i]); ?></th>
+
+                                                <?php } ?>
                                         </tr>
                                     </thead>
                                     <tbody id="an">
                                         <tr>
-                                        <?php
+                                            <?php
 
-                                    
-                                        for($i = 0; $i < mysqli_num_rows($headings)-1;$i++) {
-                                            $curr = mysqli_fetch_row($headings);
-                                            for ($j=0; $j < sizeof($curr)-1; $j++) { 
-                                                
-                                                ?> 
+                                                $headings = mysqli_query($conn, "Select * from reviews");
+                                                for ($i = 0; $i < mysqli_num_rows($headings); $i++) {
+                                                    $curr = mysqli_fetch_row($headings);
+                                                    for ($j = 0; $j < sizeof($curr); $j++) {
+
+                                            ?>
+                                                    <td>
+                                                        <?php echo $curr[$j]; ?>
+                                                    </td>
+
+
+                                                <?php } ?>
+
+
+
                                                 <td>
-                                                <?php echo $curr[$j]; ?>
+                                                    <i><a href="admin_scripts/delete_review.php?review_id=<?php echo $curr[0]; ?>"><img title="Delete" width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/filled-trash.png" alt="filled-trash" /></a></i>
+                                                    <small><br>Delete</small>
                                                 </td>
-
-                                           
-                                        <?php } ?>
-                                            
-                                        
-                            
-                                    <td>
-                                        <i><a href="admin_scripts/delete_review.php?review_id=<?php echo $curr[0]; ?>"><img title="Delete" width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/filled-trash.png" alt="filled-trash" /></a></i>
-                                        <small><br>Delete</small>
-                                    </td>
-                                </tr>
+                                        </tr>
                                 <?php
-                                    }
-                                }
-                                else {
-                                    echo "<h4> The table is empty </h4>";
-                                }?>
+                                                }
+                                            } else {
+                                                echo "<h4> The table is empty </h4>";
+                                            } ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -133,12 +132,12 @@ include_once "../scripts/functions.php";
                     </div>
                 </div>
             </div>
-          
+
         </div>
-       
+
         <footer class="footer text-center"> 2023 © Admin Panel
         </footer>
-       
+
     </div>
     </div>
     <script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>

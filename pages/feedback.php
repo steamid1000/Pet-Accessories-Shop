@@ -1,5 +1,47 @@
 <?php
 session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  require_once "../scripts/db_connect.php";
+
+  if (!isset($_SESSION['feedback'])) {
+    $_SESSION['feedback'] = false;
+  }
+  
+  $feedback_email = $_POST['feedback_email'];
+  $feedback = $_POST['feedback'];
+  $stm = $conn->prepare("insert into feedbacks(feedback_email,feedback) values(?,?)");
+  $stm->bind_param("ss",$feedback_email ,$feedback);
+  if($_SESSION['feedback'] == false)
+  {
+    if ($stm->execute()) {
+      
+      $_SESSION['feedback'] = true;
+      echo "<div class='mb-0 alert alert- alert-dismissible fade show' role='alert'>
+      <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+      </button>
+      <strong>Thanks for your feedback 🐶😸</strong> 
+      </div>
+      <script>
+      $('.alert').alert();
+      </script>";
+    }
+  }
+  else {
+    echo "<div class='mb-0 alert alert-danger alert-dismissible fade show' role='alert'>
+    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+    <span aria-hidden='true'>&times;</span>
+    </button>
+    <strong>Failed to submit your feedback, please try again after sometime.</strong> 
+    </div>
+    
+    <script>
+    $('.alert').alert();
+    </script>";
+  }
+}
+
 ?>
 
 
@@ -35,27 +77,3 @@ session_start();
 </body>
 </html>
 
-<?php
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  require_once "../scripts/db_connect.php";
-
-  $feedback_email = $_POST['feedback_email'];
-  $feedback = $_POST['feedback'];
-
-  $stm = $conn->prepare("insert into feedbacks(feedback_email,feedback) values(?,?)");
-  $stm->bind_param("ss",$feedback_email ,$feedback);
-  if(isset($_SESSION['feedback']) and $_SESSION['feedback'] == false)
-  {
-    if ($stm->execute()) {
-      
-      $_SESSION['feedbackGiven'] = true;
-      echo "done";
-    }
-  }
-  else {
-    echo "failed or you have given your feedback plz try again after sometime to give another feedback";
-  }
-}
-
-?>
