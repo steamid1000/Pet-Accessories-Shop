@@ -52,7 +52,7 @@
       </a>
       </div>
   
-      <div class="col-sm">
+      <!-- <div class="col-sm">
       <a href="./pages/specificProducts.php?pet_category=4" style="text-decoration: none;color:black;">
         <div class="img" id="img">
           <img src="./imgs/rabbit.jpg" alt="">
@@ -61,7 +61,7 @@
           <p id="rabbit">Rabbit deals</p>
         </div>
       </a>
-      </div>
+      </div> -->
     </div>
   </div>
 </body>

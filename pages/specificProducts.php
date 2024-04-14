@@ -65,7 +65,7 @@ require_once '../scripts/functions.php';
       while ($row = $result->fetch_assoc()) {
 
         ?>
-        <a href="pages/product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none; color:black;">
+        <a href="product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none; color:black;">
           <div class="card" style="width: 20rem;  max-height: 95%;">
             <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;"
               src="<?php echo getImageName($row['product_images']); ?>" alt="product images">
