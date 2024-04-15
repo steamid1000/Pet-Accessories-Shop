@@ -59,7 +59,17 @@ include_once "../scripts/functions.php";
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
-
+                            <p>Below are some filtering options for convinience</p>
+                            <p>Choose a filter option:</p>
+                            <form action="products.php" method="get">
+                                <select required name="what">
+                                    <option value="ID">Search By Product ID</option>
+                                    <option value="Name">Search By Product Name</option>
+                                </select>
+                                <input name="SearchBy" type="text" placeholder="Enter the value">
+                                <input class="btn btn-primary" type="submit" value="Search">
+                            </form>
+                            <br><br>
 
                             <div class="table-responsive">
                                 <table class="table no-wrap">
@@ -78,12 +88,22 @@ include_once "../scripts/functions.php";
                                     </thead>
                                     <tbody id="an">
                                         <?php
-                                        // $row = mysqli_fetch_array($products);
+                                        if (isset($_GET['SearchBy']) and isset($_GET['what']) and $_GET['what'] == 'Name' and $_GET['SearchBy'] != '') {
+                                            $products = mysqli_query($conn, "select * from `products` where product_name like '%$_GET[SearchBy]%' or product_description like '%$_GET[SearchBy]%'");
+                                        }
+                                        else if(isset($_GET['SearchBy']) and isset($_GET['what']) and $_GET['what'] == 'ID' and $_GET['SearchBy'] != ''){
+                                            $products = mysqli_query($conn, "select * from `products` where product_id=$_GET[SearchBy]");
+                                        }
+                                        else {
+                                            $products = mysqli_query($conn, "Select * from products");
+                                        }
+
+                                        if ($products != null) {
+                                            
                                         
-                                        $products = mysqli_query($conn, "Select * from products");
                                         while ($curr = mysqli_fetch_row($products)) {
                                             echo "<tr style='max-width: 150px;'>";
-                                           
+
                                             for ($j = 0; $j < 8; $j++) {
                                                 if ($j == 4 or $j == 5) {
                                         ?>
@@ -119,6 +139,9 @@ include_once "../scripts/functions.php";
                                             </td>
                                             </tr>
                                         <?php
+                                        }}
+                                        else {
+                                            echo "<h3 style='color:red;text-align:center'>Wrong input</h3>";
                                         }
                                         ?>
                                     </tbody>

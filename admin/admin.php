@@ -1,5 +1,10 @@
 <?php
 session_start();
+if (!isset($_SESSION['admin_id'])) {
+    session_destroy();
+    header('Location: admin_login.php', true);
+    
+}
 require_once '../scripts/db_connect.php';
 
 $total_users = $conn->query("SELECT user_id FROM users");
@@ -11,13 +16,12 @@ $total_orders = mysqli_num_rows($total_orders);
 $total_feed = $conn->query("SELECT feedback_id FROM feedbacks");
 $total_feed = mysqli_num_rows($total_feed);
 
+$total_reviews = $conn->query("SELECT review_id FROM reviews");
+$total_reviews = mysqli_num_rows($total_reviews);
 
 
-if (!isset($_SESSION['admin_id'])) {
-    session_destroy();
-    header('Location: admin_login.php', true);
-    // exit;
-}
+
+
 
 ?>
 
@@ -99,7 +103,7 @@ if (!isset($_SESSION['admin_id'])) {
                                 <h3 class="box-title">Total FeedBacks</h3>
                                 <ul class="list-inline two-part d-flex align-items-center mb-0">
                                     <li>
-                                        <div id="sparklinedash"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                        <div id="sparklinedash4"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                         </div>
                                     </li>
                                     <li class="ms-auto"><span class="counter text-blue">
@@ -118,6 +122,21 @@ if (!isset($_SESSION['admin_id'])) {
                                     </li>
                                     <li class="ms-auto"><span class="counter text-info">
                                             <?php echo $total_users; ?>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <div class="white-box analytics-info">
+                                <h3 class="box-title">Total Reviews</h3>
+                                <ul class="list-inline two-part d-flex align-items-center mb-0">
+                                    <li>
+                                        <div id="sparklinedash2"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                        </div>
+                                    </li>
+                                    <li class="ms-auto"><span class="counter text-info">
+                                            <?php echo $total_reviews; ?>
                                         </span>
                                     </li>
                                 </ul>

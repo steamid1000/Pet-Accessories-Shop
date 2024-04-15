@@ -64,6 +64,8 @@ include_once "../scripts/functions.php";
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
             <!-- ============================================================== -->
+
+
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="container-fluid">
@@ -71,15 +73,32 @@ include_once "../scripts/functions.php";
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <!-- //^Name Search section -->
+
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12">
-                        <div class="white-box">
+                        <div class="white-box">                           
+                            <p>Below are some filtering options for convinience</p>
+                            <form action="reviews.php" method="get">
+                                <label for="stars">Choose a Order:</label>
+                                <select name="Filter" id="cars">
+                                    <optgroup label="High to low">
+                                        <option value="StarsHL">Stars High to Low</option>
+                                    </optgroup>
+                                    <optgroup label="Low to High">
+                                        <option value="StarsLH">Stars Low to High</option>
+                                    </optgroup>
+                                </select>
+                                <input type="submit" class="btn btn-primary" value="Submit">
+                                <br><br>
+                            </form>
 
-                            <!-- <form action="" method="GET">
-                                <div class="d-md-flex mb-3">
-                                    <h3 class="box-title mb-0">Check Tables For </h3>
-                                </div>
-                            </form> -->
+                            <p>Search by User ID</p>
+                            <form action="reviews.php" method="get">
+                                <input name="user_ID" type="text" placeholder="Enter the USER ID">
+                                <input class="btn btn-primary" type="submit" value="Search">
+                            </form>
+                            <br><br>
+
                             <div class="table-responsive">
                                 <table class="table no-wrap">
                                     <thead>
@@ -90,17 +109,29 @@ include_once "../scripts/functions.php";
                                                 $res = mysqli_fetch_assoc($headings);
                                                 $res = array_keys($res);
                                                 for ($i = 0; $i < sizeof($res) - 1; $i++) {
+
                                             ?>
                                                     <th class="border-top-0"><?php echo str_replace('_', ' ', $res[$i]); ?></th>
 
                                                 <?php } ?>
                                         </tr>
                                     </thead>
-                                    <tbody id="an">
+                                    <tbody id="myTable">
                                         <tr>
                                             <?php
-
-                                                $headings = mysqli_query($conn, "Select * from reviews");
+                                                if (isset($_GET['Filter']) and $_GET['Filter'] == 'StarsHL') {
+                                                    $headings = mysqli_query($conn, "select * from `reviews` ORDER BY `review_stars` DESC");
+                                                }
+                                                elseif (isset($_GET['Filter']) and $_GET['Filter'] == 'StarsLH') {
+                                                    $headings = mysqli_query($conn, "select * from `reviews` ORDER BY `review_stars` ASC");
+                                                }
+                                                elseif (isset($_GET['user_ID'])) {
+                                                    $headings = mysqli_query($conn, "select * from `reviews` where user_id=$_GET[user_ID]");
+                                                }
+                                                else {
+                                                    
+                                                    $headings = mysqli_query($conn, "Select * from reviews");
+                                                }
                                                 for ($i = 0; $i < mysqli_num_rows($headings); $i++) {
                                                     $curr = mysqli_fetch_row($headings);
                                                     for ($j = 0; $j < sizeof($curr); $j++) {
@@ -151,5 +182,7 @@ include_once "../scripts/functions.php";
     <!--Custom JavaScript -->
     <script src="js/custom.js"></script>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 
 </html>
