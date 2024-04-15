@@ -29,7 +29,8 @@ if (!isset($_SESSION['admin_id'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="keywords"
+        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
     <meta name="description" content="PVR Cinema">
     <meta name="robots" content="noindex,nofollow">
     <title>🐶😸Happy Beings Admin Panel</title>
@@ -47,7 +48,8 @@ if (!isset($_SESSION['admin_id'])) {
     <!-- ============================================================== -->
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin1" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin1" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
@@ -69,7 +71,8 @@ if (!isset($_SESSION['admin_id'])) {
                             <ol class="breadcrumb ms-auto">
                                 <li><a href="#" class="fw-normal">Dashboard</a></li>
                             </ol>
-                            <a href="logout.php" class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
+                            <a href="logout.php"
+                                class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -84,7 +87,8 @@ if (!isset($_SESSION['admin_id'])) {
                             <h3 class="box-title">Total Orders</h3>
                             <ul class="list-inline two-part d-flex align-items-center mb-0">
                                 <li>
-                                    <div id="sparklinedash"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                    <div id="sparklinedash"><canvas width="67" height="30"
+                                            style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                     </div>
                                 </li>
                                 <li class="ms-auto"><span class="counter text-blue">
@@ -99,7 +103,8 @@ if (!isset($_SESSION['admin_id'])) {
                                 <h3 class="box-title">Total FeedBacks</h3>
                                 <ul class="list-inline two-part d-flex align-items-center mb-0">
                                     <li>
-                                        <div id="sparklinedash"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                        <div id="sparklinedash"><canvas width="67" height="30"
+                                                style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                         </div>
                                     </li>
                                     <li class="ms-auto"><span class="counter text-blue">
@@ -113,7 +118,8 @@ if (!isset($_SESSION['admin_id'])) {
                                 <h3 class="box-title">Total Users</h3>
                                 <ul class="list-inline two-part d-flex align-items-center mb-0">
                                     <li>
-                                        <div id="sparklinedash3"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
+                                        <div id="sparklinedash3"><canvas width="67" height="30"
+                                                style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
                                         </div>
                                     </li>
                                     <li class="ms-auto"><span class="counter text-info">
@@ -127,7 +133,7 @@ if (!isset($_SESSION['admin_id'])) {
                     <div>
                         <canvas id="Products"></canvas>
                     </div>
-                   
+
 
 
                     <footer class="footer text-center"> 2023 © Admin Panel
@@ -137,11 +143,11 @@ if (!isset($_SESSION['admin_id'])) {
             </div>
             <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!--this is for the charts-->
             <script>
-                        const ctx = document.getElementById('Products');
-                        <?php 
-                        $res = $conn->query("select * from products");
-                        $res = mysqli_fetch_assoc($res);
-                        echo "new Chart(ctx, {
+                const ctx = document.getElementById('Products');
+                <?php
+                $res = $conn->query("select * from products");
+                $res = mysqli_fetch_assoc($res);
+                echo "new Chart(ctx, {
                             type: 'bar',
                             data: {
                                 labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -160,8 +166,8 @@ if (!isset($_SESSION['admin_id'])) {
                             }
                         });";
 
-                        ?>
-                    </script>
+                ?>
+            </script>
 
             <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
             </script>
@@ -180,7 +186,8 @@ if (!isset($_SESSION['admin_id'])) {
             <!--This page JavaScript -->
             <!--chartis chart-->
             <script src="plugins/bower_components/chartist/dist/chartist.min.js"></script>
-            <script src="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+            <script
+                src="plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
             <script src="js/pages/dashboards/dashboard1.js"></script>
 
 
