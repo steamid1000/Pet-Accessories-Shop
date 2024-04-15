@@ -107,12 +107,7 @@ $total_reviews = mysqli_num_rows($total_reviews);
                                 <h3 class="box-title">Total FeedBacks</h3>
                                 <ul class="list-inline two-part d-flex align-items-center mb-0">
                                     <li>
-<<<<<<< HEAD
                                         <div id="sparklinedash4"><canvas width="67" height="30" style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
-=======
-                                        <div id="sparklinedash"><canvas width="67" height="30"
-                                                style="display: inline-block; width: 67px; height: 30px; vertical-align: top;"></canvas>
->>>>>>> ae7f32b7e6675031acea312c717296e55e300e2a
                                         </div>
                                     </li>
                                     <li class="ms-auto"><span class="counter text-blue">
