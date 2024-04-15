@@ -12,8 +12,10 @@ include_once "../scripts/functions.php";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
-    <meta name="description" content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="keywords"
+        content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+        content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
     <meta name="robots" content="noindex,nofollow">
     <title>Admin Panel</title>
     <!-- Favicon icon -->
@@ -30,7 +32,8 @@ include_once "../scripts/functions.php";
 
 <body>
 
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
 
         <?php require_once "admin_components/admin_navbar.php" ?>
         <?php require_once "admin_components/admin_sidebar.php" ?>
@@ -47,7 +50,8 @@ include_once "../scripts/functions.php";
                             <ol class="breadcrumb ms-auto">
                                 <li><a href="#" class="fw-normal">Dashboard</a></li>
                             </ol>
-                            <a href="logout.php" class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
+                            <a href="logout.php"
+                                class="btn btn-danger  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -72,17 +76,21 @@ include_once "../scripts/functions.php";
                             <br><br>
 
                             <div class="table-responsive">
-                                <table class="table no-wrap">
+                                <table class="table">
                                     <thead>
                                         <tr>
                                             <?php
-                                            $products = mysqli_query($conn, "Select * from products");
-                                            $res = mysqli_fetch_assoc($products);
-                                            $res = array_keys($res);
-                                            for ($i = 0; $i < sizeof($res); $i++) {
-                                            ?>
-                                                <th class="border-top-0"><?php echo str_replace('_', ' ', $res[$i]); ?></th>
+                                            $headings = mysqli_query($conn, "Select * from products");
+                                            if ($headings != null) {
+                                                $res = mysqli_fetch_assoc($headings);
+                                                $res = array_keys($res);
+                                                for ($i = 0; $i < sizeof($res) - 1; $i++) {
+                                                    ?>
+                                                    <th scope="col" class=" border-top-0">
+                                                        <?php echo str_replace('_', ' ', $res[$i]); ?>
+                                                    </th>
 
+<<<<<<< HEAD
                                             <?php } ?>
                                         </tr>
                                     </thead>
@@ -109,24 +117,45 @@ include_once "../scripts/functions.php";
                                         ?>
                                                     <td>
                                                         <img width="40px" height="40px" src="<?php echo getImageName($curr[$j]); ?>">
+=======
+                                                <?php } ?>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <?php
+
+                                            $headings = mysqli_query($conn, "Select * from reviews");
+                                            for ($i = 0; $i < mysqli_num_rows($headings); $i++) {
+                                                $curr = mysqli_fetch_row($headings);
+                                                for ($j = 0; $j < sizeof($curr); $j++) {
+
+                                                    ?>
+                                                    <td scope="row">
+                                                        <?php echo $curr[$j]; ?>
+>>>>>>> ae7f32b7e6675031acea312c717296e55e300e2a
                                                     </td>
 
+
+                                                <?php } ?>
+
+
+
+                                                <td>
+                                                    <i><a
+                                                            href="admin_scripts/delete_review.php?review_id=<?php echo $curr[0]; ?>"><img
+                                                                title="Delete" width="20" height="20"
+                                                                src="https://img.icons8.com/ios-glyphs/30/filled-trash.png"
+                                                                alt="filled-trash" /></a></i>
+                                                    <small><br>Delete</small>
+                                                </td>
+                                                </tr>
                                                 <?php
-                                                } else {
-                                                ?>
-
-                                            <?php if ($j == 6) {
-                                                        echo "<td>" . getProductCategory($curr[$j]) . "</td>";
-                                                    } elseif ($j == 7) {
-                                                        echo "<td>" . getPetCategory($curr[$j]) . "</td>";
-                                                    } else {
-
-                                                        echo "<td>" .
-                                                            $curr[$j]
-                                                            . "</td>";
-                                                    }
-                                                }
+                                            }
+                                            } else {
+                                                echo "<h4> The table is empty </h4>";
                                             } ?>
+<<<<<<< HEAD
 
                                             <td>
                                                 <i><a href="product_form.php?ProductID=<?php echo $curr[0]; ?>"><img title="Edit" width="20" height="20" src="https://img.icons8.com/ios-filled/50/edit--v1.png" alt="edit--v1" /></a></i>
@@ -144,8 +173,11 @@ include_once "../scripts/functions.php";
                                             echo "<h3 style='color:red;text-align:center'>Wrong input</h3>";
                                         }
                                         ?>
+=======
+>>>>>>> ae7f32b7e6675031acea312c717296e55e300e2a
                                     </tbody>
                                 </table>
+
                             </div>
                         </div>
                     </div>
