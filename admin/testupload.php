@@ -10,7 +10,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $product_category = $_POST['product_category'];
     $pet_category = $_POST['pet_category'];
 
-    $product_id = (isset($_GET['ProductID'])) ? $_GET['ProductID'] : -1;
+    $product_id = $_GET['ProductID'];
+
 
     //lets take the image here only
      $image1Given = false;
@@ -31,12 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      $image2 = ($image2Given) ? convertToBase64($_FILES['image2']['tmp_name'],$_FILES['image2']['name']) : "null"; 
 
 
-    if ((isset($_GET['update']) and $_GET['update'] == "true") and $image1Given == false) {
+    if ((isset($_GET['update']) and $_GET['update'] == "true") and $image1Given == false and $product_id != -1) {
         $stmt = $conn->prepare("UPDATE `products` SET `product_name`=?,`product_description`=?,`product_price`=?,`product_category`=?,`pet_category`=? WHERE product_id=?");
         $stmt->bind_param("ssssss",$title,$description,$product_price,$product_category,$pet_category,$product_id);
         $stmt->execute();
     }
-    elseif ((isset($_GET['update']) and $_GET['update'] == "true") and $image1Given == true) {
+    elseif ((isset($_GET['update']) and $_GET['update'] == "true") and $image1Given == true and $product_id != -1) {
         $stmt = $conn->prepare("UPDATE `products` SET `product_name`=?,`product_description`=?,`product_price`=?, `product_images`=?, `product_images2`=?,`product_category`=?,`pet_category`=? WHERE product_id=?");
         $stmt->bind_param("ssssssss",$title,$description,$product_price,$image1,$image2,$product_category,$pet_category, $product_id);
         $stmt->execute();
@@ -45,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     else {
         //Adding in the prdoduct table
         $stmt = $conn->prepare("INSERT INTO `products`(`product_name`, `product_description`, `product_price`, `product_images`, `product_images2`, `product_category`, `pet_category`) VALUES (?,?,?,?,?,?,?)");
-        $stmt->bind_param("ssssssss",$title,$description,$product_price,$iamge1,$image2,$product_category,$pet_category);
+        $stmt->bind_param("sssssss",$title,$description,$product_price,$iamge1,$image2,$product_category,$pet_category);
         $stmt->execute();
     
     }

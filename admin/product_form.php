@@ -1,10 +1,10 @@
 <?php
 
 session_start();
+require_once "../scripts/functions.php";
 function edit($index){
  require "../scripts/db_connect.php";
  require_once "../scripts/functions.php";
-
   if (isset($_GET['ProductID'])) {
     
     $product_id = $_GET['ProductID'];
@@ -26,6 +26,7 @@ function edit($index){
 <html>
 <head>
   <title>Add New Movie</title>
+  <link href="css/style.min.css" rel="stylesheet">
   <style>
     body {
       font-family: Georgia, 'Times New Roman', Times, serif;
@@ -35,6 +36,7 @@ function edit($index){
       background-position: center;
       margin: 0;
       padding: 0;
+    
     }
 
     .container {
@@ -45,7 +47,7 @@ function edit($index){
       border-radius: 5px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       background: transparent;
-      color: white;
+      color: black;
     }
 
     .form-group {
@@ -91,13 +93,21 @@ function edit($index){
     .form-group button:hover {
       background-color: #45a049;
     }
+    .sidebar-nav ul .sidebar-item .sidebar-link{
+      color: grey;
+    }
   </style>
 </head>
 
 <body>
+<div class="main-wrapper"  data-layout="vertical" data-navbarbg="skin1" data-sidebartype="full" data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+     
+        <?php require "admin_components/admin_navbar.php"; ?>
+        <?php require "admin_components/admin_sidebar.php"; ?>
+  </div>
   <div class="container">
-    <h1 style="text-align: center;color:black;">Product Details</h1>
-  <form action="testupload.php?ProductID=<?php echo $_GET['ProductID'];?>&update=<?php echo (isset($_GET['ProductID'])) ? "true" : "false" ;?>" method="post" enctype="multipart/form-data">
+    <h1 style="text-align: center;">Product Details</h1>
+  <form action="<?php echo getAddress(isset($_GET['ProductID']),isset($_GET['ProductID']) ? $_GET['ProductID']:-1); ?>" method="post" enctype="multipart/form-data">
       <div class="form-group">
         <label for="title"> Product Name:</label>
         <input type="text" id="title" name="product_name" required value="<?php echo edit(1);?>">
@@ -134,6 +144,7 @@ function edit($index){
       </div>
     </form>
   </div>
+
 </body>
 
 </html>

@@ -1,7 +1,5 @@
 <?php
 
-
-
 session_start();
 
 ?>
@@ -148,6 +146,9 @@ session_start();
   require_once '../scripts/functions.php';
 
 
+  if (isset($_GET['productID']) and $_GET['productID'] != -1) {
+    
+  
   $productID = $_GET['productID'];
 
   $result = $conn->query("select * from products where product_id='$productID'");
@@ -352,7 +353,7 @@ session_start();
       <hr>
 
       <!-- this is the rating section  -->
-    <?php } ?>
+    
 
     <hr>
     <div class=" deals container-fluid mt-5">
@@ -390,7 +391,10 @@ session_start();
 
 
 
-
+    <?php } ?>
+<?php }else {
+  echo "<h2 style='color:red;text-align:center'>The product your are looking for is not found!</h2>";
+} ?>
 
 
     <?php require_once "../components/footer.php";
