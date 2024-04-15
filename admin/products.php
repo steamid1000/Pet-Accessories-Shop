@@ -90,7 +90,6 @@ include_once "../scripts/functions.php";
                                                         <?php echo str_replace('_', ' ', $res[$i]); ?>
                                                     </th>
 
-<<<<<<< HEAD
                                             <?php } ?>
                                         </tr>
                                     </thead>
@@ -117,23 +116,6 @@ include_once "../scripts/functions.php";
                                         ?>
                                                     <td>
                                                         <img width="40px" height="40px" src="<?php echo getImageName($curr[$j]); ?>">
-=======
-                                                <?php } ?>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <?php
-
-                                            $headings = mysqli_query($conn, "Select * from reviews");
-                                            for ($i = 0; $i < mysqli_num_rows($headings); $i++) {
-                                                $curr = mysqli_fetch_row($headings);
-                                                for ($j = 0; $j < sizeof($curr); $j++) {
-
-                                                    ?>
-                                                    <td scope="row">
-                                                        <?php echo $curr[$j]; ?>
->>>>>>> ae7f32b7e6675031acea312c717296e55e300e2a
                                                     </td>
 
 
@@ -152,10 +134,7 @@ include_once "../scripts/functions.php";
                                                 </tr>
                                                 <?php
                                             }
-                                            } else {
-                                                echo "<h4> The table is empty </h4>";
                                             } ?>
-<<<<<<< HEAD
 
                                             <td>
                                                 <i><a href="product_form.php?ProductID=<?php echo $curr[0]; ?>"><img title="Edit" width="20" height="20" src="https://img.icons8.com/ios-filled/50/edit--v1.png" alt="edit--v1" /></a></i>
@@ -173,8 +152,6 @@ include_once "../scripts/functions.php";
                                             echo "<h3 style='color:red;text-align:center'>Wrong input</h3>";
                                         }
                                         ?>
-=======
->>>>>>> ae7f32b7e6675031acea312c717296e55e300e2a
                                     </tbody>
                                 </table>
 

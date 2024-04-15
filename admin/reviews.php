@@ -113,7 +113,6 @@ include_once "../scripts/functions.php";
                                                 $res = mysqli_fetch_assoc($headings);
                                                 $res = array_keys($res);
                                                 for ($i = 0; $i < sizeof($res) - 1; $i++) {
-<<<<<<< HEAD
 
                                             ?>
                                                     <th class="border-top-0"><?php echo str_replace('_', ' ', $res[$i]); ?></th>
@@ -140,24 +139,6 @@ include_once "../scripts/functions.php";
                                                 for ($i = 0; $i < mysqli_num_rows($headings); $i++) {
                                                     $curr = mysqli_fetch_row($headings);
                                                     for ($j = 0; $j < sizeof($curr); $j++) {
-=======
-                                                    ?>
-                                                    <th scope="col" class=" border-top-0">
-                                                        <?php echo str_replace('_', ' ', $res[$i]); ?>
-                                                    </th>
-
-                                                <?php } ?>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            <?php
-
-                                            $headings = mysqli_query($conn, "Select * from reviews");
-                                            for ($i = 0; $i < mysqli_num_rows($headings); $i++) {
-                                                $curr = mysqli_fetch_row($headings);
-                                                for ($j = 0; $j < sizeof($curr); $j++) {
->>>>>>> ae7f32b7e6675031acea312c717296e55e300e2a
 
                                                     ?>
                                                     <td scope="row">
