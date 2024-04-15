@@ -2,7 +2,8 @@
 
 // This file will include many usefull funtion for the project
 
-function getPetCategory($index){
+function getPetCategory($index)
+{
     switch ($index) {
         case -1:
             return "Both";
@@ -21,7 +22,8 @@ function getPetCategory($index){
     }
 }
 
-function getProductCategory($index){
+function getProductCategory($index)
+{
     switch ($index) {
         case 0:
             return "Toys";
@@ -50,39 +52,63 @@ function getProductCategory($index){
     }
 }
 
-function getDiscountedPrice($price,$discount){ // return the discounted price of the product
+function getDiscountedPrice($price, $discount)
+{ // return the discounted price of the product
     return ($price - ($price / $discount));
 }
 
 //functions to remove the extra tags from the image base64 string
-function getImageName($current_name){
-    if (str_contains($current_name,"<img src")){
-        $img_name = substr($current_name,10);
-        $img_name = substr($img_name,0,strlen($img_name)-3);
+function getImageName($current_name)
+{
+    if (str_contains($current_name, "<img src")) {
+        $img_name = substr($current_name, 10);
+        $img_name = substr($img_name, 0, strlen($img_name) - 3);
         return $img_name;
-      }
-      else {
+    } else {
         return $current_name;
-      } 
+    }
 }
 
 //function to convert the image to base64
-function convertToBase64($imagePath,$imageName){
+function convertToBase64($imagePath, $imageName)
+{
     $path = $imagePath;
-    $type = substr($imageName,strpos($imageName,'.',)+1,strlen($imageName));    
+    $type = substr($imageName, strpos($imageName, '.',) + 1, strlen($imageName));
     $data = file_get_contents($path);
     $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
     return $base64;
 }
 
 // seprate queries for each pet
-function getActiveQuery($category){
+function getActiveQuery($category)
+{
     return "select * from products where pet_category=$category limit 12";
+}
 
+//function to get action value for the product form
+// bool Update
+// int productID
+// Along with the rest of the url
+function getAddress($ProductIDSet, $productID)
+{
+    $base = "testupload.php?ProductID=";
+    $product_id = -10;
+    $update = "false";
+
+    if ($ProductIDSet == false) {
+        $product_id = -1;
+        $update = "false";
+    } else {
+        $product_id = $productID;
+        $update = "true";
+    }
+
+    return $base . $product_id . '&update=' . $update;
 }
 
 // a trial version of the user class
-class user{ // we can store the user data instead of fetching the details every time we need from the database
+class user
+{ // we can store the user data instead of fetching the details every time we need from the database
     private $user_name;
     private $user_address;
     private $user_id;
@@ -92,24 +118,27 @@ class user{ // we can store the user data instead of fetching the details every 
         $this->user_id = $user_id;
     }
 
-    public function getConnection(){
+    public function getConnection()
+    {
         include "db_connect.php";
         return $conn;
     }
 
-    public function addOrder($data){
+    public function addOrder($data)
+    {
         // order_id 	product_id 	user_id 	order_amount 	order_address 	order_date 
         $connect = $this->getConnection();
         $note = $connect->prepare("insert into orders(product_id,user_id,order_amount,order_address,order_date) values(?,?,?,?,?)");
-        $note->bind_param("sssss",$product_id,$this->user_id,$order_amount,$this->user_address,$order_date);
+        $note->bind_param("sssss", $product_id, $this->user_id, $order_amount, $this->user_address, $order_date);
         $note->execute();
     }
 
-    public function setData(){
+    public function setData()
+    {
         $connect = $this->getConnection();
         $set = $connect->query("select * from users where user_id=$this->user_id");
         $set = mysqli_fetch_assoc($set);
-        
+
         $this->user_id = $set['user_id'];
         $this->user_name = $set['user_name'];
         $this->user_address = $set['user_address'];
@@ -118,6 +147,3 @@ class user{ // we can store the user data instead of fetching the details every 
         echo $this->user_address;
     }
 }
-
-
-?>

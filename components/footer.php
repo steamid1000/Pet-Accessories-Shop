@@ -101,7 +101,7 @@ margin: 10px;
             <i class="fa fa-twitter"></i>
             <i class="fa fa-youtube-play"></i>
             <p>Project Build By</p>
-            <p>|| SHIVRUDRA PATIL || PRATIRAJ KUNNURE || </p>
+            <p>|| SHIVRUDRA PATIL || PRATIRAJ PATIL || </p>
             
 
         </div>
