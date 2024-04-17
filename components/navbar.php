@@ -97,7 +97,7 @@
                         </button>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="http://localhost/Pet-Accessories-Shop/pages/editProfile.php">Edit Profile</a>
-                            <a class="dropdown-item" href="#">My Review</a>
+                            <a class="dropdown-item" href="http://localhost/Pet-Accessories-Shop/pages/recentReviews.php">My Review</a>
                             <a class="dropdown-item" href="http://localhost/Pet-Accessories-Shop/pages/recentOrders.php">Recent Orders</a>
                            
                     </div>
