@@ -32,9 +32,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   // Handle non-POST requests if needed
   die("Error: This script only accepts POST requests");
 }
+
 $query=$conn->query('INSERT INTO `reviews` (`review_id`, `user_id`, `product_id`, `review_stars`, `review_description`, `review_date`) 
 VALUES (?, ?, '?', '$starId', 'ok', CURRENT_TIMESTAMP);
 ')
+
 echo "final checking it right now" . $starId;
 echo "redmi note 11Pro + 5G";
 
