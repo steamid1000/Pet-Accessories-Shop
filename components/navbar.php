@@ -96,13 +96,10 @@
                             Profile
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#">Edit Profile</a>
+                            <a class="dropdown-item" href="http://localhost/Pet-Accessories-Shop/pages/editProfile.php">Edit Profile</a>
                             <a class="dropdown-item" href="#">My Review</a>
-                            <a class="dropdown-item" href="#">Recent Orders</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">logout</a>
-
-                        </div>
+                            <a class="dropdown-item" href="http://localhost/Pet-Accessories-Shop/pages/recentOrders.php">Recent Orders</a>
+                           
                     </div>
 
                 <?php } ?>
