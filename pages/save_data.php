@@ -38,7 +38,7 @@ VALUES (?, ?, '?', '$starId', 'ok', CURRENT_TIMESTAMP);
 ')
 
 echo "final checking it right now" . $starId;
-echo "redmi note 11Pro + 5G";
+
 
 
 ?>
