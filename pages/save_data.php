@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 // ')
 
 echo "final checking it right now" . $starId;
-echo "redmi note 11Pro + 5G";
+
 
 
 ?>
