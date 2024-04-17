@@ -2,6 +2,31 @@
 session_start();
 require_once "scripts/db_connect.php";
 require_once 'scripts/functions.php';
+
+if (isset($_GET['order_status']) and $_GET['order_status'] == 'succ' ) {
+  echo "<div class='alert alert-warning alert-dismissible fade show' role='alert'>
+    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button>
+    <strong>Your order has been Placed, The product will arrive at your doorstep in a week! 🐶😸</strong> 
+  </div>
+  
+  <script>
+    $('.alert').alert();
+  </script>";
+}
+else if (isset($_GET['order_status']) and $_GET['order_status'] == 'fail' ) {
+  echo "<div class='alert alert-danger alert-dismissible fade show' role='alert'>
+    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+      <span aria-hidden='true'>&times;</span>
+    </button>
+    <strong>Failed to Place your order, try again later</strong> 
+  </div>
+  
+  <script>
+    $('.alert').alert();
+  </script>";
+}
 ?>
 
 <!doctype html>
@@ -103,7 +128,7 @@ require_once 'scripts/functions.php';
               <h3>For <?php echo getPetCategory($row['pet_category']); ?></h3>
               </span> </p>
               <p class="card-text "> <span><?php echo $row['product_name']; ?></span> </p>
-              <div class="d-flex " style="text-align: center; justify-content:left; >
+              <div class="d-flex " style="text-align: center; justify-content:left;">
               <p class=" card-text "> <span style=" font-size: 20px; font-weight: 600;">
                 <?php echo "Rs." . getDiscountedPrice($row['product_price'], 10); ?></span> <span class="ml-2"
                   style="text-decoration: line-through; font-size: 15px;"> <?php echo "RS." . $row['product_price']; ?>

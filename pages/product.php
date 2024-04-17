@@ -4,14 +4,9 @@ session_start();
 require_once "../scripts/db_connect.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $qt = $_POST['qt'];
-  $productId = $_GET['product_id'];
-
-  $product_price = $conn->query("select product_price where product_id=$productId");
-  $product_price = mysqli_fetch_array($product_price);
-  $product_amount = $product_price[0] * $qt;
-
-  $stmt = $conn->query("INSERT INTO `orders`(`product_id`, `user_id`, `order_amount`, `order_address`, `order_date`) VALUES (?,?,?,?',?)");
+  $_SESSION['qt'] = $_POST['qt'];
+  $_SESSION['productID'] = $_POST['productID'];
+  header("Location: order.php");
 }
 
 
@@ -203,7 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </span> <span style="color: orange; font-weight: 600;">(10% OFF)</span></p>
           <p style="color: green;">Inclusive of all taxes</p>
           <div class="forms">
-            <form action="order.php" method="post">
+            <form action="" method="post">
               <input type="hidden" name="productID" value="<?php echo $_GET['productID']; ?>">
               <input type="number" name="qt" class="form-control" id="quantity" name="quantity" min="1"
                 style="max-width: 200px;">
@@ -250,9 +245,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
           <div class="col-sm stars  text-center">
             <span class="rateStar fa fa-star" id="1"></span>
-            <span class=" rateStar fa fa-star" id="2"></span>
+            <span class="rateStar fa fa-star" id="2"></span>
             <span class="rateStar fa fa-star" id="3"></span>
-            <span class="rateStar  fa fa-star" id="4"></span>
+            <span class="rateStar fa fa-star" id="4"></span>
             <span class="rateStar fa fa-star" id="5"></span>
           </div>
           <div class="starline">
@@ -361,16 +356,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form action="" id="reviewform" class="mt-5" method="post">
 
               <div class="mystars mr-5" id="star">
-                <span class=" reviewstars fa fa-star " id="1"></span>
-                <span class=" reviewstars fa fa-star " id="2"></span>
-                <span class=" reviewstars fa fa-star " id="3"></span>
-                <span class=" reviewstars fa fa-star" id="4"></span>
-                <span class=" reviewstars fa fa-star" id="5"></span>
+                <span class=" rateStar fa fa-star " id="1"></span>
+                <span class=" rateStar fa fa-star " id="2"></span>
+                <span class=" rateStar fa fa-star " id="3"></span>
+                <span class=" rateStar fa fa-star" id="4"></span>
+                <span class=" rateStar fa fa-star" id="5"></span>
                 <input type="hidden" value="0" name="stars">
               </div>
               <div class="review row">
                 <input type="textarea" class="form-control mt-5" style="min-width:100%;height:10rem; margin:auto"
-                  name="review" placeholder="share Feedback...">
+                  name="review" placeholder="Tell us more about your review...">
 
               </div>
               <button class="submit btn btn-primary mt-3" id="submitbtn">Submit Review</button>
@@ -378,7 +373,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
         </div>
         <hr>
-
+        <?php } ?>
         <!-- this is the rating section  -->
 
 
@@ -420,7 +415,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-      <?php } ?>
+  
     <?php } else {
     echo "<h2 style='color:red;text-align:center'>The product your are looking for is not found!</h2>";
   } ?>
@@ -442,13 +437,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $isReviewed = mysqli_fetch_array($isReviewed);
 
 
-
       if ($isOrdered != null) {
         if ($isOrdered != null) // checking if the current user has ordered the product
         {
           if ($isReviewed == null)
-            return true;
-          else
+          return true;
+        else
             return false;
         }
       } else
@@ -456,8 +450,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     ?>
 
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores, dolor ad? Porro rem dolore ab labore tenetur
-    error explicabo. Neque fuga iure distinctio earum impedit illo consequatur doloremque inventore aliquam.
+    
     <!-- /this is model -->
     <?php require_once "../components/modal.php" ?>
     <!-- /this is model -->
@@ -513,7 +506,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 
-            // console.log("printing current starid", starId);
+            console.log("printing current starid", starId);
 
           }
 
