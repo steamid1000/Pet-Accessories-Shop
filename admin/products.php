@@ -63,7 +63,17 @@ include_once "../scripts/functions.php";
                 <div class="row">
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
-
+                            <p>Below are some filtering options for convinience</p>
+                            <p>Choose a filter option:</p>
+                            <form action="products.php" method="get">
+                                <select required name="what">
+                                    <option value="ID">Search By Product ID</option>
+                                    <option value="Name">Search By Product Name</option>
+                                </select>
+                                <input name="SearchBy" type="text" placeholder="Enter the value">
+                                <input class="btn btn-primary" type="submit" value="Search">
+                            </form>
+                            <br><br>
 
                             <div class="table-responsive">
                                 <table class="table">
@@ -80,21 +90,32 @@ include_once "../scripts/functions.php";
                                                         <?php echo str_replace('_', ' ', $res[$i]); ?>
                                                     </th>
 
-                                                <?php } ?>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                            <?php } ?>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="an">
+                                        <?php
+                                        if (isset($_GET['SearchBy']) and isset($_GET['what']) and $_GET['what'] == 'Name' and $_GET['SearchBy'] != '') {
+                                            $products = mysqli_query($conn, "select * from `products` where product_name like '%$_GET[SearchBy]%' or product_description like '%$_GET[SearchBy]%'");
+                                        }
+                                        else if(isset($_GET['SearchBy']) and isset($_GET['what']) and $_GET['what'] == 'ID' and $_GET['SearchBy'] != ''){
+                                            $products = mysqli_query($conn, "select * from `products` where product_id=$_GET[SearchBy]");
+                                        }
+                                        else {
+                                            $products = mysqli_query($conn, "Select * from products");
+                                        }
 
-                                            <?php
+                                        if ($products != null) {
+                                            
+                                        
+                                        while ($curr = mysqli_fetch_row($products)) {
+                                            echo "<tr style='max-width: 150px;'>";
 
-                                            $headings = mysqli_query($conn, "Select * from reviews");
-                                            for ($i = 0; $i < mysqli_num_rows($headings); $i++) {
-                                                $curr = mysqli_fetch_row($headings);
-                                                for ($j = 0; $j < sizeof($curr); $j++) {
-
-                                                    ?>
-                                                    <td scope="row">
-                                                        <?php echo $curr[$j]; ?>
+                                            for ($j = 0; $j < 8; $j++) {
+                                                if ($j == 4 or $j == 5) {
+                                        ?>
+                                                    <td>
+                                                        <img width="40px" height="40px" src="<?php echo getImageName($curr[$j]); ?>">
                                                     </td>
 
 
@@ -113,9 +134,24 @@ include_once "../scripts/functions.php";
                                                 </tr>
                                                 <?php
                                             }
-                                            } else {
-                                                echo "<h4> The table is empty </h4>";
                                             } ?>
+
+                                            <td>
+                                                <i><a href="product_form.php?ProductID=<?php echo $curr[0]; ?>"><img title="Edit" width="20" height="20" src="https://img.icons8.com/ios-filled/50/edit--v1.png" alt="edit--v1" /></a></i>
+                                                <small><br>Edit</small>
+                                                <!-- This text can be removed -->
+                                            </td>
+                                            <td>
+                                                <i><a href="../db_scripts/delete_product.php?ProductID=<?php echo $curr[0]; ?>"><img title="Delete" width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/filled-trash.png" alt="filled-trash" /></a></i>
+                                                <small><br>Delete</small>
+                                            </td>
+                                            </tr>
+                                        <?php
+                                        }}
+                                        else {
+                                            echo "<h3 style='color:red;text-align:center'>Wrong input</h3>";
+                                        }
+                                        ?>
                                     </tbody>
                                 </table>
 

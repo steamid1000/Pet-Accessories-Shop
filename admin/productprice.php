@@ -11,7 +11,8 @@ include "../scripts/db_connect.php";
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <script src="https://kit.fontawesome.com/14850a9668.js" crossorigin="anonymous"></script>
 
-  <title>Document</title>
+  <title>🐶😸Product and Prices</title>
+  <link href="css/style.min.css" rel="stylesheet">
 </head>
 <style>
   #myChart {
@@ -21,8 +22,14 @@ include "../scripts/db_connect.php";
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <body>
-
-
+<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin1" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <?php require "admin_components/admin_navbar.php"; ?>
+        <?php require "admin_components/admin_sidebar.php"; ?>
+</div>
   <?php
 
 
