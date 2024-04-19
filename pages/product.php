@@ -245,7 +245,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <span class="rateStar fa fa-star" id="3"></span>
             <span class="rateStar fa fa-star" id="4"></span>
             <span class="rateStar fa fa-star" id="5"></span>
-            <h3>( <?php echo ceil($stars['sum']/$stars['total']);?> )</h3>
+            <h3>Avg: ( <?php echo floor($stars['sum']/$stars['total']);?> )</h3>
+            <h3>Total Reviews: ( <?php echo $stars['total'];?> )</h3>
           </div>
           <div class="starline">
             <div style="font-size: 15px;" class="row d-flex flex-row mt-4">
