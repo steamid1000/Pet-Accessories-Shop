@@ -106,6 +106,45 @@ function getAddress($ProductIDSet, $productID)
     return $base . $product_id . '&update=' . $update;
 }
 
+// function to fetch all the stars of a specific product sorted according to the stars of key value pair.
+// 1 : 35
+// 2 : 40, etc
+
+function getStars($productID){
+    include "../scripts/db_connect.php";
+
+    $reviewStars = array('1'=>0,'2'=>0,'3'=>0,'4'=>0,'5'=>0,'total'=>0,'sum'=>0); // a associative array to store every star count
+
+    $data = $conn->query("select review_stars from reviews where product_id='$productID'");
+
+    while ($row = mysqli_fetch_row($data)) { 
+        $currentRating = $row[0];
+        switch ($currentRating) {
+            case 1:
+                $reviewStars['1']++;
+                break;
+            case 2:
+                $reviewStars['2']++;
+                break;
+            case 3:
+                $reviewStars['3']++;
+                break;
+            case 4:
+                $reviewStars['4']++;
+                break;
+            case 5:
+                $reviewStars['5']++;
+                break;
+            
+        }
+        $reviewStars['total']++;
+        $reviewStars['sum']+=$currentRating;
+    }
+
+  
+    return $reviewStars;
+}
+
 // a trial version of the user class
 class user
 { // we can store the user data instead of fetching the details every time we need from the database
