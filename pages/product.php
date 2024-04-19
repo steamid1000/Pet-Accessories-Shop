@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!doctype html>
 <html lang="en">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://kit.fontawesome.com/14850a9668.js" crossorigin="anonymous"></script>
 
 <style>
   .card:hover {
@@ -312,7 +313,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               echo '<div class="card mt-4 mb-4" style="text-align: center; border:1px solid grey;min-width:600px; margin-left:6rem">' .
                 '<div class="row d-flex justify-content-between mb-3 mt-2">' .
                 '<div class="img d-flex align-items-center">' .
-                '<img style="width: 2.5rem; margin-left: 1.3rem;" src="../imgs/back.png" alt="">' .
+                '<img style="width: 2.5rem; margin-left: 1.3rem;" <span style="widht:2.5rem"> <i class="fa-solid fa-user"></i> </span> ' .
                 '<p style="margin-left: 1rem; text-transform: capitalize; font-style: italic;">' . $feedbackRow['user_name'] . '</p>' .
                 '</div>' .
                 '<div class="date" style="margin-right: 1.9rem;">' .
@@ -373,49 +374,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           </div>
         </div>
         <hr>
-        <?php } ?>
-        <!-- this is the rating section  -->
+      <?php } ?>
+      <!-- this is the rating section  -->
 
 
-        <hr>
-        <div class=" deals container-fluid mt-5">
-          <p style="font-size:1.5rem;font-weight: 600;">Special Deals</p>
-          <div class="row d-flex justify-content-around align-items-around">
-            <?php
+      <hr>
+      <div class=" deals container-fluid mt-5">
+        <p style="font-size:1.5rem;font-weight: 600;">Special Deals</p>
+        <div class="row d-flex justify-content-around align-items-around">
+          <?php
 
-            $result = $conn->query("Select * from products where pet_category=$category limit 4");
-            while ($row = $result->fetch_assoc()) {
+          $result = $conn->query("Select * from products where pet_category=$category limit 4");
+          while ($row = $result->fetch_assoc()) {
 
-              ?>
-              <a href="product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
-                <div class="card" style="width: 20rem;  max-height: 100%;">
-                  <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;"
-                    src="<?php echo getImageName($row['product_images']); ?>" alt="product images">
+            ?>
+            <a href="product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
+              <div class="card" style="width: 20rem;  max-height: 100%;">
+                <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;"
+                  src="<?php echo getImageName($row['product_images']); ?>" alt="product images">
 
-                  <div class="card-body" style="position:relative;">
-                    <h3>For
-                      <?php echo getPetCategory($row['pet_category']); ?>
-                    </h3>
-                    </span> </p>
-                    <div class="d-flex " style="text-align: center; justify-content:left;">
-                      <p class=" card-text "> <span style=" font-size: 20px; font-weight: 600;">
-                          <?php echo "Rs." . getDiscountedPrice($row['product_price'], 10); ?></span> <span class="ml-2"
-                          style="text-decoration: line-through; font-size: 15px;">
-                          <?php echo "RS." . $row['product_price']; ?>
-                        </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
-                    </div>
+                <div class="card-body" style="position:relative;">
+                  <h3>For
+                    <?php echo getPetCategory($row['pet_category']); ?>
+                  </h3>
+                  </span> </p>
+                  <div class="d-flex " style="text-align: center; justify-content:left;">
+                    <p class=" card-text "> <span style=" font-size: 20px; font-weight: 600;">
+                        <?php echo "Rs." . getDiscountedPrice($row['product_price'], 10); ?></span> <span class="ml-2"
+                        style="text-decoration: line-through; font-size: 15px;">
+                        <?php echo "RS." . $row['product_price']; ?>
+                      </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
                   </div>
                 </div>
-              </a>
-            <?php } ?>
-          </div>
+              </div>
+            </a>
+          <?php } ?>
         </div>
-        <hr>
+      </div>
+      <hr>
 
 
 
 
-  
+
     <?php } else {
     echo "<h2 style='color:red;text-align:center'>The product your are looking for is not found!</h2>";
   } ?>
@@ -441,8 +442,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($isOrdered != null) // checking if the current user has ordered the product
         {
           if ($isReviewed == null)
-          return true;
-        else
+            return true;
+          else
             return false;
         }
       } else
@@ -450,7 +451,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     ?>
 
-    
+
     <!-- /this is model -->
     <?php require_once "../components/modal.php" ?>
     <!-- /this is model -->

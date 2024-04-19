@@ -23,24 +23,32 @@ $recent_orders = $conn->query("SELECT reviews.review_description,reviews.review_
 <body>
     <?php include_once '../components/navbar.php'; ?>
     <div class="container">
-        <h3 class="mt-4 mb-3" style="color: orange;font-weight:bolder;text-align:center;text-decoration:underline;">Your Recent Orders</h3>
+        <h3 class="mt-4 mb-3" style="color: orange;font-weight:bolder;text-align:center;text-decoration:underline;">Your
+            Recent Reviews </h3>
         <hr>
         <div class="conatiner">
             <?php while ($row = mysqli_fetch_assoc($recent_orders)) {
                 ?>
-            <div class="container-fluid d-flex mb-5 justify-content-center">
-            <img style="max-width: 150px;" class="img mr-4" src="<?php echo getImageName($row['product_images']) ?>" alt="">
-            
+                <div class="container-fluid d-flex mb-5 justify-content-center">
+                    <img style="max-width: 150px;" class="img mr-4" src="<?php echo getImageName($row['product_images']) ?>"
+                        alt="">
 
-            <div class="conatienr">
-            <h3><?php echo $row['product_name'] ?></h3>
-            <h5><strong>Review Date: </strong><?php echo $row['review_date'] ?></h5>
-            <h5><strong>Review Description: </strong><?php echo $row['review_description'] ?> </h5>
-            <h5><strong> Stars: </strong><?php echo '('.$row['review_stars'] . ") "; $star = $row['review_stars']; while($star--){ echo '⭐';  } ?> </h5>
-            </div>
-        
-            </div>
-            <hr>
+
+                    <div class="conatienr">
+                        <h3><?php echo $row['product_name'] ?></h3>
+                        <h5><strong>Review Date: </strong><?php echo $row['review_date'] ?></h5>
+                        <h5><strong>Review Description: </strong><?php echo $row['review_description'] ?> </h5>
+                        <h5><strong> Stars:
+                            </strong><?php echo '(' . $row['review_stars'] . ") ";
+                            $star = $row['review_stars'];
+                            while ($star--) {
+                                echo '⭐';
+                            } ?>
+                        </h5>
+                    </div>
+
+                </div>
+                <hr>
             <?php } ?>
         </div>
     </div>

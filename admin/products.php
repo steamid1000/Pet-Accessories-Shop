@@ -84,71 +84,68 @@ include_once "../scripts/functions.php";
                                             if ($headings != null) {
                                                 $res = mysqli_fetch_assoc($headings);
                                                 $res = array_keys($res);
-                                                for ($i = 0; $i < sizeof($res) - 1; $i++) {
+                                                for ($i = 0; $i < sizeof($res); $i++) {
                                                     ?>
                                                     <th scope="col" class=" border-top-0">
                                                         <?php echo str_replace('_', ' ', $res[$i]); ?>
                                                     </th>
 
-                                            <?php } ?>
+                                                <?php }
+                                            } ?>
                                         </tr>
                                     </thead>
                                     <tbody id="an">
                                         <?php
                                         if (isset($_GET['SearchBy']) and isset($_GET['what']) and $_GET['what'] == 'Name' and $_GET['SearchBy'] != '') {
                                             $products = mysqli_query($conn, "select * from `products` where product_name like '%$_GET[SearchBy]%' or product_description like '%$_GET[SearchBy]%'");
-                                        }
-                                        else if(isset($_GET['SearchBy']) and isset($_GET['what']) and $_GET['what'] == 'ID' and $_GET['SearchBy'] != ''){
+                                        } else if (isset($_GET['SearchBy']) and isset($_GET['what']) and $_GET['what'] == 'ID' and $_GET['SearchBy'] != '') {
                                             $products = mysqli_query($conn, "select * from `products` where product_id=$_GET[SearchBy]");
-                                        }
-                                        else {
+                                        } else {
                                             $products = mysqli_query($conn, "Select * from products");
                                         }
 
                                         if ($products != null) {
-                                            
-                                        
-                                        while ($curr = mysqli_fetch_row($products)) {
-                                            echo "<tr style='max-width: 150px;'>";
-
-                                            for ($j = 0; $j < 8; $j++) {
-                                                if ($j == 4 or $j == 5) {
-                                        ?>
-                                                    <td>
-                                                        <img width="40px" height="40px" src="<?php echo getImageName($curr[$j]); ?>">
-                                                    </td>
 
 
-                                                <?php } ?>
+                                            while ($curr = mysqli_fetch_row($products)) {
+                                                echo "<tr style='max-width: 150px;'>";
+                                                for ($j = 0; $j < 8; $j++) {
+                                                    if ($j == 4 or $j == 5) {
+                                                        ?>
+                                                        <td><img style="max-width:70px" src="<?php echo getImageName($curr[$j]); ?>">
+                                                        </td>;
+                                                        <?php
+                                                    } else if ($j == 6) {
+                                                        echo "<td>" . getProductCategory($curr[$j]) . "</td>";
+                                                    } else if ($j == 7) {
+                                                        echo "<td>" . getPetCategory($curr[$j]) . "</td>";
+                                                    } else {
+                                                        echo "<td>" . $curr[$j] . "</td>";
+                                                    }
+                                                    if ($j == 7) { ?>
+                                                        <td>
+                                                            <i><a href="product_form.php?ProductID=<?php echo $curr[0]; ?>"><img
+                                                                        title="Delete" width="20" height="20"
+                                                                        src="https://img.icons8.com/ios-glyphs/30/edit.png"
+                                                                        alt="filled-trash" /></a></i>
+                                                            <small><br>Edit</small>
+                                                        </td>
+                                                        <td>
+                                                            <i><a
+                                                                    href="admin_scripts/delete_product.php?productID=<?php echo $curr[0]; ?>"><img
+                                                                        title="Delete" width="20" height="20"
+                                                                        src="https://img.icons8.com/ios-glyphs/30/filled-trash.png"
+                                                                        alt="filled-trash" /></a></i>
+                                                            <small><br>Delete</small>
+                                                        </td>
 
-
-
-                                                <td>
-                                                    <i><a
-                                                            href="admin_scripts/delete_review.php?review_id=<?php echo $curr[0]; ?>"><img
-                                                                title="Delete" width="20" height="20"
-                                                                src="https://img.icons8.com/ios-glyphs/30/filled-trash.png"
-                                                                alt="filled-trash" /></a></i>
-                                                    <small><br>Delete</small>
-                                                </td>
-                                                </tr>
-                                                <?php
+                                                    <?php }
+                                                }
+                                                ?>
+                                                <tr>
+                                                    <?php
                                             }
-                                            } ?>
-
-                                            <td>
-                                                <i><a href="product_form.php?ProductID=<?php echo $curr[0]; ?>"><img title="Edit" width="20" height="20" src="https://img.icons8.com/ios-filled/50/edit--v1.png" alt="edit--v1" /></a></i>
-                                                <small><br>Edit</small>
-                                                <!-- This text can be removed -->
-                                            </td>
-                                            <td>
-                                                <i><a href="../db_scripts/delete_product.php?ProductID=<?php echo $curr[0]; ?>"><img title="Delete" width="20" height="20" src="https://img.icons8.com/ios-glyphs/30/filled-trash.png" alt="filled-trash" /></a></i>
-                                                <small><br>Delete</small>
-                                            </td>
-                                            </tr>
-                                        <?php
-                                        }}
-                                        else {
+                                        } else {
                                             echo "<h3 style='color:red;text-align:center'>Wrong input</h3>";
                                         }
                                         ?>
