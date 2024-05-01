@@ -27,7 +27,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
 
   .checked {
-    color: orange;
+    color: red;
+    font-size: 50px;
+    ;
+    width: 50px;
+    height: 70px;
   }
 
   a:link {
@@ -54,6 +58,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     margin-left: 150px;
 
   }
+
+  .rated {
+    color: orange;
+  }
+
+  .ratedParent {
+    background-color: red;
+  }
+
 
   .mystars span {
     font-size: 3rem;
@@ -167,21 +180,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_fetch_assoc($result);
 
     $category = $result['pet_category']; // this is so that we can load similar products below
-
+  
     // stars data fetched here
     $stars = getStars($productID);
-  
 
 
-  ?>
+
+    ?>
 
 
     <div class="container-fluid mt-5 mb-5 ">
       <div class="row col-12">
         <div class=" col-md-8">
           <div class="row">
-            <img src="<?php echo getImageName($result['product_images']); ?>" class="col-md-6" style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
-            <img src="<?php echo getImageName($result['product_images2']); ?>" class="col-md-6" style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
+            <img src="<?php echo getImageName($result['product_images']); ?>" class="col-md-6"
+              style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
+            <img src="<?php echo getImageName($result['product_images2']); ?>" class="col-md-6"
+              style="min-height: 100vh; max-height: 100vh; background-size: cover;" alt="">
           </div>
         </div>
 
@@ -201,20 +216,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <div class="forms">
             <form action="" method="post">
               <input type="hidden" name="productID" value="<?php echo $_GET['productID']; ?>">
-              <input type="number" name="qt" class="form-control" id="quantity" name="quantity" min="1" style="max-width: 200px;">
-              <?php if (isset($_SESSION['user_id'])) { ?> <button type="submit" class="btn btn-primary mt-4 ml-0" style="width: 252px; background-color:orange; border-radius:5px;height:45px"> <span> Buy Now</span> <span class="ml-4"> <img width="30" height="30" src="https://img.icons8.com/pastel-glyph/64/cat--v3.png" alt="cat--v3" /></span> </button>
-            </form>
-          </div>
-          <hr>
-        <?php } else { ?>
-          <h5 style="color: red;">Please Login to buy product!</h5>
-          <hr>
-        <?php } ?>
-        <div class="description mt-3"></div>
-        <p> <span style="font-weight:bold"> Product Details </span> <span><img width="24" height="24" src="https://img.icons8.com/material-sharp/24/note.png" alt="note" /></span> </p>
-        <p>
-          <?php echo $result['product_description']; ?>
-        </p>
+              <input type="number" name="qt" class="form-control" id="quantity" name="quantity" min="1"
+                style="max-width: 200px;">
+              <?php if (isset($_SESSION['user_id'])) { ?> <button type="submit" class="btn btn-primary mt-4 ml-0"
+                  style="width: 252px; background-color:orange; border-radius:5px;height:45px"> <span> Buy Now</span> <span
+                    class="ml-4"> <img width="30" height="30" src="https://img.icons8.com/pastel-glyph/64/cat--v3.png"
+                      alt="cat--v3" /></span> </button>
+              </form>
+            </div>
+            <hr>
+          <?php } else { ?>
+            <h5 style="color: red;">Please Login to buy product!</h5>
+            <hr>
+          <?php } ?>
+          <div class="description mt-3"></div>
+          <p> <span style="font-weight:bold"> Product Details </span> <span><img width="24" height="24"
+                src="https://img.icons8.com/material-sharp/24/note.png" alt="note" /></span> </p>
+          <p>
+            <?php echo $result['product_description']; ?>
+          </p>
 
 
         </div>
@@ -240,13 +260,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="row">
 
           <div class="col-sm stars  text-center">
-            <span class="rateStar fa fa-star" id="1"></span>
-            <span class="rateStar fa fa-star" id="2"></span>
-            <span class="rateStar fa fa-star" id="3"></span>
-            <span class="rateStar fa fa-star" id="4"></span>
-            <span class="rateStar fa fa-star" id="5"></span>
-            <h3>Avg: ( <?php echo floor($stars['sum']/$stars['total']);?> )</h3>
-            <h3>Total Reviews: ( <?php echo $stars['total'];?> )</h3>
+            <span class="rateStar fa fa-star" id="A"></span>
+            <span class="rateStar fa fa-star" id="B"></span>
+            <span class="rateStar fa fa-star" id="C"></span>
+            <span class="rateStar fa fa-star" id="D"></span>
+            <span class="rateStar fa fa-star" id="E"></span>
+            <h3>Avg: ( <?php $average = floor($stars['sum'] / $stars['total']);
+            echo $average;
+
+
+
+            ?> )</h3>
+            <h3>Total Reviews: ( <?php echo $stars['total']; ?> )</h3>
           </div>
           <div class="starline">
             <div style="font-size: 15px;" class="row d-flex flex-row mt-4">
@@ -254,8 +279,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p>5</p> <span class="fa fa-star" id="one"></span>
               </div>
               <div class="rating-bar">
-                <div class="filled-bar" style="width:  <?php echo ($stars['5']/$stars['total'])*100; ?>%;"></div>
-                <h5><?php echo $stars['5'];?></h5>
+                <div class="filled-bar" style="width:  <?php echo ($stars['5'] / $stars['total']) * 100; ?>%;"></div>
+                <h5><?php echo $stars['5']; ?></h5>
               </div>
 
             </div>
@@ -264,8 +289,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p>4</p> <span class="fa fa-star" id="two"></span>
               </div>
               <div class="rating-bar">
-                <div class="filled-bar" style="width:  <?php echo ($stars['4']/$stars['total'])*100; ?>%;"></div>
-                <h5><?php echo $stars['4'];?></h5>
+                <div class="filled-bar" style="width:  <?php echo ($stars['4'] / $stars['total']) * 100; ?>%;"></div>
+                <h5><?php echo $stars['4']; ?></h5>
               </div>
 
             </div>
@@ -274,8 +299,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p>3</p> <span class="fa fa-star" id="three"></span>
               </div>
               <div class="rating-bar">
-                <div class="filled-bar" style="width:  <?php echo ($stars['3']/$stars['total'])*100; ?>%;"></div>
-                <h5><?php echo $stars['3'];?></h5>
+                <div class="filled-bar" style="width:  <?php echo ($stars['3'] / $stars['total']) * 100; ?>%;"></div>
+                <h5><?php echo $stars['3']; ?></h5>
               </div>
 
             </div>
@@ -284,8 +309,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <p>2</p> <span class="fa fa-star" id="four"></span>
               </div>
               <div class="rating-bar">
-                <div class="filled-bar" style="width:  <?php echo ($stars['2']/$stars['total'])*100; ?>%;"></div>
-                <h5><?php echo $stars['2'];?></h5>
+                <div class="filled-bar" style="width:  <?php echo ($stars['2'] / $stars['total']) * 100; ?>%;"></div>
+                <h5><?php echo $stars['2']; ?></h5>
               </div>
 
             </div>
@@ -296,8 +321,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
               </div>
               <div class="rating-bar">
-                <div class="filled-bar" style="width: <?php echo ($stars['1']/$stars['total'])*100; ?>% ;"></div>
-                <h5><?php echo $stars['1'];?></h5>
+                <div class="filled-bar" style="width: <?php echo ($stars['1'] / $stars['total']) * 100; ?>% ;"></div>
+                <h5><?php echo $stars['1']; ?></h5>
               </div>
 
             </div>
@@ -325,7 +350,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 '<p class="ml-1 mr-1">' . $feedbackRow['review_description'] . '</p>' .
                 '</div>';
               // End PHP code
-
+          
             }
             ?>
 
@@ -341,10 +366,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- this is the rating section  -->
 
     <?php // rating option will only be give to users that have placed the order and not given the review earlier
+    
+      if (canWriteReview()) {
 
-    if (canWriteReview()) {
+        ?>
 
-    ?>
+      <!-- this is reiew sction after buying the product by user -->
       <div class="container-fluid">
 
         <div class="d-flex container justify-content-around">
@@ -358,16 +385,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <form action="" id="reviewform" class="mt-5" method="post">
 
-              <div class="mystars mr-5" id="star">
-                <span class=" rateStar fa fa-star " id="1"></span>
-                <span class=" rateStar fa fa-star " id="2"></span>
-                <span class=" rateStar fa fa-star " id="3"></span>
-                <span class=" rateStar fa fa-star" id="4"></span>
-                <span class=" rateStar fa fa-star" id="5"></span>
+              <div class="mystars mr-5" id="reviewstars">
+                <span class=" rateMe fa fa-star " id="1"></span>
+                <span class=" rateMe fa fa-star " id="2"></span>
+                <span class=" rateMe fa fa-star " id="3"></span>
+                <span class=" rateMe fa fa-star" id="4"></span>
+                <span class=" rateMe fa fa-star" id="5"></span>
                 <input type="hidden" value="0" name="stars">
               </div>
               <div class="review row">
-                <input type="textarea" class="form-control mt-5" style="min-width:100%;height:10rem; margin:auto" name="review" placeholder="Tell us more about your review...">
+                <input type="textarea" class="form-control mt-5" style="min-width:100%;height:10rem; margin:auto"
+                  name="review" placeholder="Tell us more about your review...">
 
               </div>
               <button class="submit btn btn-primary mt-3" id="submitbtn">Submit Review</button>
@@ -376,7 +404,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <hr>
       <?php } ?>
-      <!-- this is the rating section  -->
+      <!-- this is the rating section when user buy the product  -->
 
 
       <hr>
@@ -388,10 +416,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $result = $conn->query("Select * from products where pet_category=$category limit 4");
           while ($row = $result->fetch_assoc()) {
 
-          ?>
+            ?>
             <a href="product.php?productID=<?php echo $row['product_id']; ?>" style="text-decoration: none;">
               <div class="card" style="width: 20rem;  max-height: 100%;">
-                <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;" src="<?php echo getImageName($row['product_images']); ?>" alt="product images">
+                <img class="card-img-top" style="max-height:12.5rem;object-fit: contain;"
+                  src="<?php echo getImageName($row['product_images']); ?>" alt="product images">
 
                 <div class="card-body" style="position:relative;">
                   <h3>For
@@ -400,7 +429,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                   </span> </p>
                   <div class="d-flex " style="text-align: center; justify-content:left;">
                     <p class=" card-text "> <span style=" font-size: 20px; font-weight: 600;">
-                        <?php echo "Rs." . getDiscountedPrice($row['product_price'], 10); ?></span> <span class="ml-2" style="text-decoration: line-through; font-size: 15px;">
+                        <?php echo "Rs." . getDiscountedPrice($row['product_price'], 10); ?></span> <span class="ml-2"
+                        style="text-decoration: line-through; font-size: 15px;">
                         <?php echo "RS." . $row['product_price']; ?>
                       </span> </span> <span class="ml-2" style="color: orange; font-weight: 800;"> (10% OFF)</span> </p>
                   </div>
@@ -456,69 +486,120 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- /this is model -->
 
     <script>
-      let stars = document.querySelectorAll('.rateStar');
-      console.log(typeof(stars));
-      let starId;
 
-      stars.forEach(function(star) {
-          star.addEventListener('click', () => {
 
-            starId = parseInt(star.id);
-            console.log(starId);
+      // chatgpt code
+      let reviewstars = document.querySelectorAll('.rateMe');
+      let starIds;
 
-            for (let i = 1; i <= starId; i++) {
-              // let tempId = String(i)
-              let tempId = i.toString();
-              let colorme = document.getElementById(tempId);
-              // console.log(colorme);
+      reviewstars.forEach(function (str) {
+        str.addEventListener('click', () => {
+          starIds = parseInt(str.id);
 
-              if (colorme) {
+          for (let i = 1; i <= starIds; i++) {
+            let tempIds = i.toString();
+            let clrme = document.getElementById(tempIds);
+            // console.log(clrme);
 
-                if (colorme.style.color == "") {
-                  colorme.style.color = "orange";
-                } else {
-                  colorme.style.color = "";
-                  // i will run  a for loop inside that
-                  for (let i = 1; i <= 5; i++) {
-                    let tempStar = i.toString();
-                    let removeMyColor = document.getElementById(tempStar);
-                    // removeMyColor.style.color = "";
-                    // console.log(removeMyColor)
-                    removeMyColor.style.color = "";
-                  }
-                }
+
+            if (clrme) {
+
+              if (clrme.style.color == "") {
+
+                // clrme.classList.add("checked")
+                clrme.style.color = "orange";
+
               }
+              else {
+                // clrme.classList.remove("checked");
+                clrme.style.color = "";
+                for (let i = 1; i <= 5; i++) {
+                  let tempStar = i.toString();
+                  let removeMyColor = document.getElementById(tempStar);
+                  removeMyColor.style.color = "";
 
-              var xhr = new XMLHttpRequest();
-              xhr.open('POST', 'save_data.php', true);
-              xhr.setRequestHeader('Content-Type', 'application/json');
-              xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE) {
-                  // Handle response from PHP script if needed
-                  console.log(xhr.responseText);
+
                 }
-              };
-              xhr.send(JSON.stringify({
-                starId: starId
-              }));
-              console.log(JSON.stringify({
-                starId: starId
-              }));
 
 
-
-
-              console.log("printing current starid", starId);
-
+              }
             }
 
+          }
+        })
+      })
+
+
+      // chatgpt code
 
 
 
 
 
-          })
-        }
+
+
+      let stars = document.querySelectorAll('.rateStar');
+
+      let starId;
+
+      stars.forEach(function (star) {
+        star.addEventListener('click', () => {
+
+          starId = parseInt(star.id);
+
+
+          for (let i = 1; i <= starIds; i++) {
+
+            let tempId = i.toString();
+            let colorme = document.getElementById(tempId);
+
+
+            if (colorme) {
+
+              if (colorme.style.color == "") {
+                colorme.style.color = "orange";
+              } else {
+                colorme.style.color = "";
+
+                for (let i = 1; i <= 5; i++) {
+                  let tempStar = i.toString();
+                  let removeMyColor = document.getElementById(tempStar);
+
+                  removeMyColor.style.color = "";
+                }
+              }
+            }
+
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'save_data.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState === XMLHttpRequest.DONE) {
+                // Handle response from PHP script if needed
+                console.log(xhr.responseText);
+              }
+            };
+            xhr.send(JSON.stringify({
+              starId: starId
+            }));
+            console.log(JSON.stringify({
+              starId: starId
+            }));
+
+
+
+
+            console.log("printing current starid", starId);
+
+          }
+
+
+
+
+
+
+        })
+      }
 
       );
     </script>
