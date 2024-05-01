@@ -53,10 +53,17 @@
                         </a>
                     </li>
                     <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="sales.php"
+                            aria-expanded="false">
+                            <i class="fa fa-chart-simple" aria-hidden="true"></i>
+                            <span class="hide-menu">Sales</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
                         <a class="sidebar-link waves-effect waves-dark sidebar-link"
                             href="product_name_and_purchase_date.php" aria-expanded="false">
                             <i class="fa-solid fa-chart-simple"></i>
-                            <span class="hide-menu">&nbsp;&nbsp;Product Price and Date Report</span>
+                            <span class="hide-menu">Product Price Report</span>
                         </a>
                     </li>
 
@@ -64,7 +71,7 @@
                         <a class="sidebar-link waves-effect waves-dark sidebar-link" href="productprice.php"
                             aria-expanded="false">
                             <i class="fa-solid fa-chart-simple"></i>
-                            <span class="hide-menu"> Product name and Price</span>
+                            <span class="hide-menu">Product Name and Price</span>
                         </a>
                     </li>
                     <li class="sidebar-item">
